@@ -8,6 +8,8 @@
     <string name="map_level">Mapa de niveles</string>
     <string name="map_level_details">Detalles de los niveles</string>
 
+    <string name="main_error_googleplay_title">Dispositivo no soportado</string>
+    <string name="main_error_googleplay_message">Tu versión de Android no parece soportar el paquete de servicios de GooglePlay.</string>
 
     <!-- Menu buttons mainactivity -->
     <string name="menu_map">Mapa de alergia</string>

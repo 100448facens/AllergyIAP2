@@ -8,6 +8,10 @@
     <string name="map_level_details">Map Level Details</string>
 
 
+    <string name="main_error_googleplay_title">Device not supported</string>
+    <string name="main_error_googleplay_message">Your version of Android does not seem to support the GooglePlay services package.</string>
+
+
 
     <!-- Menu buttons mainactivity -->
     <string name="menu_map">Map Allergy</string>

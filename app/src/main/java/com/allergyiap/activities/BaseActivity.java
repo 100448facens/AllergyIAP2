@@ -32,7 +32,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         context = getApplicationContext();
-        db = DBHelper.getDBHelper(context);
+        /*db = DBHelper.getDBHelper(context);
 
         try {
             Log.d("TESTE10", "STARTING");
@@ -40,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             Log.d("TESTE10", String.valueOf(l.size()));
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
         updateLocale();
         if (getSupportActionBar() != null)
