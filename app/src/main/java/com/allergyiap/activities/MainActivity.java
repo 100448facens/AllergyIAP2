@@ -14,15 +14,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.allergyiap.R;
+import com.allergyiap.entities.ProductCatalogEntity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -48,7 +51,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        //getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -73,35 +76,46 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if(id == R.id.nav_settings) {
-            startActivity(new Intent(this, SettingsActivity.class));
-        } else {
 
-            Class fragmentClass = null;
-            Fragment fragment = null;
-
-            switch (id) {
-                case R.id.nav_camera:
-                    break;
-                case R.id.nav_gallery:
-                    break;
-                case R.id.nav_slideshow:
-                    break;
-                case R.id.nav_manage:
-                    break;
-            }
-
-            try {
-                fragment = (Fragment) fragmentClass.newInstance();
-                FragmentManager manager = getSupportFragmentManager();
-                manager.beginTransaction().replace(R.id.main_fragment, fragment).commit();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        switch (id) {
+            case R.id.nav_login:
+                break;
+            case R.id.nav_level:
+                openFragment(LevelAllergyFragment.class);
+                changeTabText(R.string.menu_level);
+                break;
+            case R.id.nav_products:
+                openFragment(ProductsFragment.class);
+                changeTabText(R.string.menu_product);
+                break;
+            case R.id.nav_allergy:
+                break;
+            case R.id.nav_settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                break;
+            case R.id.nav_help:
+                break;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void changeTabText(int title) {
+        toolbar.setTitle(title);
+    }
+
+    private void openFragment(Class fragmentClass) {
+
+        try {
+            Fragment fragment = (Fragment) fragmentClass.newInstance();
+            FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction().replace(R.id.main_fragment, fragment).commit();
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

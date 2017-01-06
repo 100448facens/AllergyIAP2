@@ -3,21 +3,21 @@
 
     <group android:id="@+id/grp_1" android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_login"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:title="@string/menu_login" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_level"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="@string/menu_level" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_products"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="@string/menu_product" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_allergy"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="@string/menu_allergy" />
 
     </group>
 
@@ -25,7 +25,12 @@
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_settings"
-            android:title="Settings" />
+            android:title="@string/menu_settings" />
+
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_menu_settings"
+            android:title="@string/menu_help" />
     </group>
 
     <!--item android:title="">
