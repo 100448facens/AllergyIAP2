@@ -2,15 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.allergyiap">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-
-
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
     <uses-feature android:name="android.hardware.location.gps" />
-
 
     <application
         android:allowBackup="true"
@@ -18,8 +15,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".activities.LaunchScreenActivity"
+        <activity
+            android:name=".activities.LaunchScreenActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -28,22 +25,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activities.MainActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation|screenSize"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SettingsActivity"
-            android:label="@string/menu_settings"/>
-
+            android:label="@string/menu_settings" />
         <activity
             android:name=".activities.ProductCatalogMapActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/product_catalog_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation|screenSize"/>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -56,12 +50,23 @@
             </intent-filter>
         </service>
         <!-- will be used to handle the registration token lifecycle. This is required for sending messages to specific devices/device groups -->
-        <service android:name=".utils.FCMInstanceIDService" android:exported="true">
+        <service
+            android:name=".utils.FCMInstanceIDService"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
+        <activity
+            android:name=".activities.MyAllergiesActivity"
+            android:label="@string/title_activity_my_allergies" />
+        <activity
+            android:name=".activities.LocationActivity"
+            android:label="@string/title_activity_location" />
+
+        <activity android:name=".activities.HelpActivity"
+            android:label="@string/title_activity_help" />
     </application>
 
 </manifest>
