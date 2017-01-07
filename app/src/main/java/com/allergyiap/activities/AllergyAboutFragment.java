@@ -9,13 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.allergyiap.R;
 import com.allergyiap.beans.Allergy;
-import com.allergyiap.entities.CatalogEntity;
-import com.allergyiap.entities.DownloadImageTask;
 
 /**
  * A simple {@link Fragment} subclass.

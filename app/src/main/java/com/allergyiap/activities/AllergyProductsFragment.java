@@ -16,8 +16,9 @@ import android.view.ViewGroup;
 
 import com.allergyiap.R;
 import com.allergyiap.adapters.CatalogAdapter;
+import com.allergyiap.beans.Allergy;
 import com.allergyiap.beans.ProductCatalog;
-import com.allergyiap.entities.CatalogEntity;
+import com.allergyiap.service.ProductCatalogService;
 import com.allergyiap.utils.C;
 
 import java.util.ArrayList;
@@ -27,14 +28,14 @@ public class AllergyProductsFragment extends Fragment {
 
     static final String TAG = "AllergyProductsFragment";
 
-    MainActivity activity;
-    Context context;
-    View view;
+    private AllergyActivity activity;
+    private Context context;
+    private View view;
     private CatalogAdapter adapter;
     private RecyclerView recyclerView;
-    List<ProductCatalog> catalogs = new ArrayList<>();
     private AsyncTask<Void, Void, List<ProductCatalog>> task;
 
+    private Allergy allergy;
 
     public AllergyProductsFragment() {
         // Required empty public constructor
@@ -43,10 +44,11 @@ public class AllergyProductsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = (MainActivity) getActivity();
+        activity = (AllergyActivity) getActivity();
         context = getActivity().getApplicationContext();
 
         //activity.updateLocale();
+        allergy = activity.getAllergy();
     }
 
     @Override
@@ -90,7 +92,7 @@ public class AllergyProductsFragment extends Fragment {
     private void loadAdapter(final List<ProductCatalog> list) {
         Log.d(TAG, ".loadAdapter");
 
-        /*if (adapter == null)
+        if (adapter == null)
             adapter = new CatalogAdapter(context, list);
         else
             adapter.setCatalogs(list);
@@ -99,7 +101,7 @@ public class AllergyProductsFragment extends Fragment {
         adapter.setOnItemClickListener(new CatalogAdapter.OnItemClickListener() {
 
             @Override
-            public void onItemClick(View view, int position, CatalogEntity catalogEntity) {
+            public void onItemClick(View view, int position, ProductCatalog catalogEntity) {
                 //setContentView(R.layout.product_info);
 
                 Intent intent = new Intent(activity, ProductCatalogMapActivity.class);
@@ -108,7 +110,7 @@ public class AllergyProductsFragment extends Fragment {
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
-        });*/
+        });
     }
 
     private class LoadProductsByAllergyBT extends AsyncTask<Void, Void, List<ProductCatalog>> {
@@ -122,6 +124,7 @@ public class AllergyProductsFragment extends Fragment {
         @Override
         protected List<ProductCatalog> doInBackground(Void... params) {
 
+            ProductCatalogService.getAllByAllergy(allergy.getIdallergy());
             return null;
         }
 
@@ -129,7 +132,6 @@ public class AllergyProductsFragment extends Fragment {
         protected void onPostExecute(List<ProductCatalog> result) {
             super.onPostExecute(result);
             view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
-            catalogs = result;
             loadAdapter(result);
         }
     }

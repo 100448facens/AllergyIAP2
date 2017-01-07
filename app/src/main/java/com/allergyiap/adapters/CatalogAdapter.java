@@ -10,8 +10,7 @@ import android.widget.TextView;
 
 import com.allergyiap.R;
 import com.allergyiap.beans.ProductCatalog;
-import com.allergyiap.entities.CatalogEntity;
-import com.allergyiap.entities.DownloadImageTask;
+import com.allergyiap.utils.DownloadImageTask;
 
 import java.util.List;
 

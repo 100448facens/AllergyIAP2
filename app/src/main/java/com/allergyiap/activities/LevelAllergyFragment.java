@@ -33,6 +33,7 @@ public class LevelAllergyFragment extends Fragment {
 
     MainActivity activity;
     Context context;
+    View view;
     private AllergiesLevelAdapter adapter;
     private RecyclerView recyclerView;
     private AsyncTask<Void, Void, List<AllergyLevel>> task;
@@ -64,7 +65,7 @@ public class LevelAllergyFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         Log.v(TAG, ".onViewCreated");
         super.onViewCreated(view, savedInstanceState);
-
+        this.view = view;
         recyclerView = (RecyclerView) activity.findViewById(R.id.scrollableview);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -113,7 +114,7 @@ public class LevelAllergyFragment extends Fragment {
         Intent intent = new Intent(activity, AllergyActivity.class);
         Bundle b = new Bundle();
         b.putSerializable(C.IntentExtra.Sender.VAR_ALLERGY, allergy);
-        b.putSerializable(C.IntentExtra.Sender.VAR_ALLERGY2, allergyLevel   );
+        b.putSerializable(C.IntentExtra.Sender.VAR_ALLERGY2, allergyLevel);
         intent.putExtras(b);
         startActivity(intent);
     }
@@ -124,7 +125,7 @@ public class LevelAllergyFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            activity.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -136,9 +137,8 @@ public class LevelAllergyFragment extends Fragment {
         @Override
         protected void onPostExecute(List<AllergyLevel> result) {
             super.onPostExecute(result);
-            activity.findViewById(R.id.progress_bar).setVisibility(View.GONE);
-            allergiesLevel = result;
-            loadAdapter(allergiesLevel);
+            view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
+            loadAdapter(result);
         }
     }
 }

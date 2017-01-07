@@ -48,7 +48,7 @@ public class AllergiesLevelAdapter extends RecyclerView.Adapter<AllergiesLevelAd
         viewHolder.name.setText(allergy.getAllergy_name());
         viewHolder.status.setText(aLevel.getForecast_level());
         int resource = 0;
-        switch(Integer.parseInt(String.valueOf(aLevel.getCurrent_level()))){
+        switch((int)aLevel.getCurrent_level()){
             case 0 : resource = R.drawable.legend_level_allergy_null; break;
             case 1 : resource = R.drawable.legend_level_allergy_low; break;
             case 2 : resource = R.drawable.legend_level_allergy_medium; break;

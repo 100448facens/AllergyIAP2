@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity
         for (int i = 0; i < menuItemPosition.values().length; i++)
             menuItemVisibility[i] = false;
 
-        navigationView.setCheckedItem(R.id.nav_products);
-        navigationView.getMenu().performIdentifierAction(R.id.nav_products, 0);
+        navigationView.setCheckedItem(R.id.nav_level);
+        navigationView.getMenu().performIdentifierAction(R.id.nav_level, 0);
     }
 
     @Override

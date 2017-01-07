@@ -53,6 +53,8 @@ public class AllergyActivity extends BaseActivity {
             }
         });
 
+        getSupportActionBar().setTitle(allergy.getAllergy_name());
+
         viewPager = (ViewPager) findViewById(R.id.container);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);

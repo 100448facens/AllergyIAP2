@@ -10,6 +10,7 @@
     <uses-feature android:name="android.hardware.location.gps" />
 
     <application
+        android:name="com.allergyiap.AllergyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -67,7 +68,8 @@
         <activity
             android:name=".activities.HelpActivity"
             android:label="@string/title_activity_help" />
-        <activity android:name=".activities.AllergyActivity"></activity>
+        <activity android:name=".activities.AllergyActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
