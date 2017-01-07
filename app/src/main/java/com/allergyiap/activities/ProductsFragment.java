@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import com.allergyiap.R;
 import com.allergyiap.adapters.CatalogAdapter;
 import com.allergyiap.entities.CatalogEntity;
+import com.allergyiap.utils.C;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +29,11 @@ public class ProductsFragment extends Fragment {
 
     MainActivity activity;
     Context context;
+    View view;
     private CatalogAdapter adapter;
     private RecyclerView recyclerView;
     List<CatalogEntity> catalogs = new ArrayList<>();
-    private AsyncTask<Void, Void, Void> task;
+    private AsyncTask<Void, Void, List<CatalogEntity>> task;
 
 
     public ProductsFragment() {
@@ -59,8 +61,8 @@ public class ProductsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         Log.v(TAG, ".onViewCreated");
         super.onViewCreated(view, savedInstanceState);
-
-        recyclerView = (RecyclerView) activity.findViewById(R.id.scrollableview);
+        this.view = view;
+        recyclerView = (RecyclerView) view.findViewById(R.id.scrollableview);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setHasFixedSize(true);
@@ -99,30 +101,45 @@ public class ProductsFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position, CatalogEntity catalogEntity) {
                 //setContentView(R.layout.product_info);
-                startActivity(new Intent(context, ProductCatalogMapActivity.class));
 
+                Intent intent = new Intent(activity, ProductCatalogMapActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(C.IntentExtra.Sender.VAR_PRODUCT, catalogEntity);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }
 
-    private class LoadAllergiesBT extends AsyncTask<Void, Void, Void> {
+    private class LoadAllergiesBT extends AsyncTask<Void, Void, List<CatalogEntity>> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            activity.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
-            return null;
+        protected List<CatalogEntity> doInBackground(Void... params) {
+
+            //TODO : Get Products Data from server
+
+            List<CatalogEntity> catalogs = new ArrayList<>();
+            catalogs.add(new CatalogEntity(1,"Nasal Steroids","These are drugs you spray into your nose","http://www.krishnaherbals.com/images/allergy-care-zoom.jpg"));
+            catalogs.add(new CatalogEntity(1,"Antihistamines","These drugs work against the chemical histamine","http://www.alwaysayurveda.com/wp-content/uploads/2013/05/Arjuna1.png"));
+            catalogs.add(new CatalogEntity(1,"Decongestants","These drugs unclog your stuffy nose","http://www.anytimeherbal.com/images/arjuna.gif"));
+            catalogs.add(new CatalogEntity(1,"Anthipollen","These drugs unclog your stuffy nose","http://www.anytimeherbal.com/images/arjuna.gif"));
+
+
+            return catalogs;
         }
 
         @Override
-        protected void onPostExecute(Void result) {
+        protected void onPostExecute(List<CatalogEntity> result) {
             super.onPostExecute(result);
-            activity.findViewById(R.id.progress_bar).setVisibility(View.GONE);
-            loadAdapter(catalogs);
+            view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
+            catalogs = result;
+            loadAdapter(result);
         }
     }
 }

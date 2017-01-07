@@ -20,6 +20,11 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Toolbar toolbar;
+    private Menu menu;
+    private boolean[] menuItemVisibility;
+    private DrawerLayout drawer;
+
+    public enum menuItemPosition {SEARCH, LOCATION}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +33,7 @@ public class MainActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -36,6 +41,13 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        menuItemVisibility = new boolean[menuItemPosition.values().length];
+        for (int i = 0; i < menuItemPosition.values().length; i++)
+            menuItemVisibility[i] = false;
+
+        navigationView.setCheckedItem(R.id.nav_products);
+        navigationView.getMenu().performIdentifierAction(R.id.nav_products, 0);
     }
 
     @Override
@@ -51,8 +63,17 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
+        this.menu = menu;
+        updateMenu();
         return true;
+    }
+
+    private void updateMenu() {
+        if (this.menu != null) {
+            this.menu.findItem(R.id.menu_search).setVisible(menuItemVisibility[menuItemPosition.SEARCH.ordinal()]);
+            this.menu.findItem(R.id.menu_station).setVisible(menuItemVisibility[menuItemPosition.LOCATION.ordinal()]);
+        }
     }
 
     @Override
@@ -63,8 +84,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.menu_station) {
+            startActivity(new Intent(this, LocationActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
@@ -79,21 +100,33 @@ public class MainActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.nav_login:
+                drawer.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_level:
                 openFragment(LevelAllergyFragment.class);
                 changeTabText(R.string.menu_level);
+                menuItemVisibility[menuItemPosition.SEARCH.ordinal()] = false;
+                menuItemVisibility[menuItemPosition.LOCATION.ordinal()] = true;
+                updateMenu();
                 break;
             case R.id.nav_products:
                 openFragment(ProductsFragment.class);
                 changeTabText(R.string.menu_product);
+                menuItemVisibility[menuItemPosition.SEARCH.ordinal()] = true;
+                menuItemVisibility[menuItemPosition.LOCATION.ordinal()] = false;
+                updateMenu();
                 break;
             case R.id.nav_allergy:
+                drawer.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(this, MyAllergiesActivity.class));
                 break;
             case R.id.nav_settings:
+                drawer.closeDrawer(GravityCompat.START);
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
             case R.id.nav_help:
+                drawer.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(this, HelpActivity.class));
                 break;
         }
 
@@ -111,9 +144,7 @@ public class MainActivity extends AppCompatActivity
             FragmentManager manager = getSupportFragmentManager();
             manager.beginTransaction().replace(R.id.main_fragment, fragment).commit();
 
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
