@@ -1,6 +1,5 @@
 package com.allergyiap.activities;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -16,30 +15,28 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.allergyiap.R;
-import com.allergyiap.adapters.AllergiesLevelAdapter;
-import com.allergyiap.beans.Allergy;
-import com.allergyiap.beans.AllergyLevel;
-import com.allergyiap.service.AllergyLevelService;
+import com.allergyiap.adapters.CatalogAdapter;
+import com.allergyiap.beans.ProductCatalog;
+import com.allergyiap.entities.CatalogEntity;
 import com.allergyiap.utils.C;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class LevelAllergyFragment extends Fragment {
+public class AllergyProductsFragment extends Fragment {
 
-    static final String TAG = "LevelAllergyFragment";
+    static final String TAG = "AllergyProductsFragment";
 
     MainActivity activity;
     Context context;
-    private AllergiesLevelAdapter adapter;
+    View view;
+    private CatalogAdapter adapter;
     private RecyclerView recyclerView;
-    private AsyncTask<Void, Void, List<AllergyLevel>> task;
+    List<ProductCatalog> catalogs = new ArrayList<>();
+    private AsyncTask<Void, Void, List<ProductCatalog>> task;
 
-    List<AllergyLevel> allergiesLevel;
 
-    public LevelAllergyFragment() {
+    public AllergyProductsFragment() {
         // Required empty public constructor
     }
 
@@ -52,11 +49,11 @@ public class LevelAllergyFragment extends Fragment {
         //activity.updateLocale();
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        //return inflater.inflate(R.layout.fragment_products, container, false);
         return inflater.inflate(R.layout.fragment_recycler, container, false);
     }
 
@@ -64,8 +61,8 @@ public class LevelAllergyFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         Log.v(TAG, ".onViewCreated");
         super.onViewCreated(view, savedInstanceState);
-
-        recyclerView = (RecyclerView) activity.findViewById(R.id.scrollableview);
+        this.view = view;
+        recyclerView = (RecyclerView) view.findViewById(R.id.scrollableview);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setHasFixedSize(true);
@@ -73,72 +70,67 @@ public class LevelAllergyFragment extends Fragment {
         loadData();
     }
 
-
     @Override
     public void onDestroyView() {
+        Log.v(TAG, "onDestroyView");
         super.onDestroyView();
-
-        adapter = null;
 
         if (task != null) {
             task.cancel(true);
             task = null;
         }
+        adapter = null;
     }
 
     private void loadData() {
-        task = new LoadAllergyLevelBT();
+        task = new LoadProductsByAllergyBT();
         task.execute();
     }
 
-    private void loadAdapter(final List<AllergyLevel> list) {
+    private void loadAdapter(final List<ProductCatalog> list) {
         Log.d(TAG, ".loadAdapter");
 
-        if (adapter == null)
-            adapter = new AllergiesLevelAdapter(context, list);
+        /*if (adapter == null)
+            adapter = new CatalogAdapter(context, list);
         else
-            adapter.setAllergies(list);
+            adapter.setCatalogs(list);
 
         recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(new AllergiesLevelAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new CatalogAdapter.OnItemClickListener() {
 
             @Override
-            public void onItemClick(View view, int position, AllergyLevel allergyLevel, Allergy allergy) {
-                showAllergyDetail(allergy, allergyLevel);
+            public void onItemClick(View view, int position, CatalogEntity catalogEntity) {
+                //setContentView(R.layout.product_info);
+
+                Intent intent = new Intent(activity, ProductCatalogMapActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(C.IntentExtra.Sender.VAR_PRODUCT, catalogEntity);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
-        });
+        });*/
     }
 
-    private void showAllergyDetail(Allergy allergy, AllergyLevel allergyLevel) {
-        Intent intent = new Intent(activity, AllergyActivity.class);
-        Bundle b = new Bundle();
-        b.putSerializable(C.IntentExtra.Sender.VAR_ALLERGY, allergy);
-        b.putSerializable(C.IntentExtra.Sender.VAR_ALLERGY2, allergyLevel   );
-        intent.putExtras(b);
-        startActivity(intent);
-    }
-
-
-    private class LoadAllergyLevelBT extends AsyncTask<Void, Void, List<AllergyLevel>> {
+    private class LoadProductsByAllergyBT extends AsyncTask<Void, Void, List<ProductCatalog>> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            activity.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
         }
 
         @Override
-        protected List<AllergyLevel> doInBackground(Void... params) {
+        protected List<ProductCatalog> doInBackground(Void... params) {
 
-            return AllergyLevelService.getAll();
+            return null;
         }
 
         @Override
-        protected void onPostExecute(List<AllergyLevel> result) {
+        protected void onPostExecute(List<ProductCatalog> result) {
             super.onPostExecute(result);
-            activity.findViewById(R.id.progress_bar).setVisibility(View.GONE);
-            allergiesLevel = result;
-            loadAdapter(allergiesLevel);
+            view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
+            catalogs = result;
+            loadAdapter(result);
         }
     }
 }

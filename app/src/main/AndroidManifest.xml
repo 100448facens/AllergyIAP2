@@ -64,9 +64,10 @@
         <activity
             android:name=".activities.LocationActivity"
             android:label="@string/title_activity_location" />
-
-        <activity android:name=".activities.HelpActivity"
+        <activity
+            android:name=".activities.HelpActivity"
             android:label="@string/title_activity_help" />
+        <activity android:name=".activities.AllergyActivity"></activity>
     </application>
 
 </manifest>

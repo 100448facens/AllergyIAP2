@@ -1,16 +1,105 @@
 package com.allergyiap.activities;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckedTextView;
 
 import com.allergyiap.R;
+import com.allergyiap.adapters.AllergyAdapter;
+import com.allergyiap.adapters.StationAdapter;
+import com.allergyiap.beans.Allergy;
+import com.allergyiap.beans.Station;
+import com.allergyiap.service.AllergyService;
+import com.allergyiap.service.StationService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LocationActivity extends BaseActivity {
+
+    private static final String TAG = "LocationActivity";
+
+    private StationAdapter adapter;
+    private RecyclerView recyclerView;
+    List<Station> stations = new ArrayList<>();
+    private AsyncTask<Void, Void, List<Station>> task;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
+
+        recyclerView = (RecyclerView) findViewById(R.id.scrollableview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setHasFixedSize(true);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loadData();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if(task != null) {
+            task.cancel(true);
+            task = null;
+        }
+    }
+
+    private void loadData() {
+        task = new LoadStationsBT();
+        task.execute();
+    }
+
+    private void loadAdapter(final List<Station> list) {
+        Log.d(TAG, ".loadAdapter");
+
+        if (adapter == null)
+            adapter = new StationAdapter(context, list);
+        else
+            adapter.setStation(list);
+
+        recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new StationAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position, Station alertEntity) {
+                ((CheckedTextView)view).toggle();
+            }
+        });
+    }
+
+    private class LoadStationsBT extends AsyncTask<Void, Void, List<Station>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected List<Station> doInBackground(Void... params) {
+
+            return StationService.getAll();
+        }
+
+        @Override
+        protected void onPostExecute(List<Station> result) {
+            super.onPostExecute(result);
+            findViewById(R.id.progress_bar).setVisibility(View.GONE);
+            stations = result;
+            loadAdapter(result);
+        }
     }
 }
