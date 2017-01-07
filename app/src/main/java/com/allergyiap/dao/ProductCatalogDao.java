@@ -111,6 +111,10 @@ public class ProductCatalogDao extends Dao<ProductCatalog> {
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + customer_idcustomer + " = " + id + ";";
 		return select(selectQuery);
 	}
+	public List<ProductCatalog> getByUserAllergy(long id) {
+		String selectQuery = "SELECT * FROM product_catalog INNER JOIN user_allergies ON user_allergies.id_allergy = product_catalog.allergy_idallergy WHERE user_allergies.id_user = " + id;
+		return select(selectQuery);
+	}
 
 	public ProductCatalog get(long id) {
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + idproduct_catalog + " = " + id + ";";

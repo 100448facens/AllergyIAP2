@@ -2,7 +2,6 @@ package com.allergyiap.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,7 +16,9 @@ import android.view.ViewGroup;
 
 import com.allergyiap.R;
 import com.allergyiap.adapters.CatalogAdapter;
-import com.allergyiap.entities.CatalogEntity;
+import com.allergyiap.beans.ProductCatalog;
+import com.allergyiap.service.ProductCatalogService;
+import com.allergyiap.service.UserService;
 import com.allergyiap.utils.C;
 
 import java.util.ArrayList;
@@ -32,8 +33,8 @@ public class ProductsFragment extends Fragment {
     View view;
     private CatalogAdapter adapter;
     private RecyclerView recyclerView;
-    List<CatalogEntity> catalogs = new ArrayList<>();
-    private AsyncTask<Void, Void, List<CatalogEntity>> task;
+    List<ProductCatalog> catalogs = new ArrayList<>();
+    private LoadAllergiesBT task;
 
 
     public ProductsFragment() {
@@ -87,7 +88,7 @@ public class ProductsFragment extends Fragment {
         task.execute();
     }
 
-    private void loadAdapter(final List<CatalogEntity> list) {
+    private void loadAdapter(final List<ProductCatalog> list) {
         Log.d(TAG, ".loadAdapter");
 
         if (adapter == null)
@@ -99,7 +100,7 @@ public class ProductsFragment extends Fragment {
         adapter.setOnItemClickListener(new CatalogAdapter.OnItemClickListener() {
 
             @Override
-            public void onItemClick(View view, int position, CatalogEntity catalogEntity) {
+            public void onItemClick(View view, int position, ProductCatalog catalogEntity) {
                 //setContentView(R.layout.product_info);
 
                 Intent intent = new Intent(activity, ProductCatalogMapActivity.class);
@@ -111,7 +112,7 @@ public class ProductsFragment extends Fragment {
         });
     }
 
-    private class LoadAllergiesBT extends AsyncTask<Void, Void, List<CatalogEntity>> {
+    private class LoadAllergiesBT extends AsyncTask<Void, Void, List<ProductCatalog>> {
 
         @Override
         protected void onPreExecute() {
@@ -120,22 +121,22 @@ public class ProductsFragment extends Fragment {
         }
 
         @Override
-        protected List<CatalogEntity> doInBackground(Void... params) {
-
+        protected List<ProductCatalog> doInBackground(Void... params) {
             //TODO : Get Products Data from server
-
-            List<CatalogEntity> catalogs = new ArrayList<>();
+            /*
+            List<ProductCatalog> catalogs = new ArrayList<>();
             catalogs.add(new CatalogEntity(1,"Nasal Steroids","These are drugs you spray into your nose","http://www.krishnaherbals.com/images/allergy-care-zoom.jpg"));
             catalogs.add(new CatalogEntity(1,"Antihistamines","These drugs work against the chemical histamine","http://www.alwaysayurveda.com/wp-content/uploads/2013/05/Arjuna1.png"));
             catalogs.add(new CatalogEntity(1,"Decongestants","These drugs unclog your stuffy nose","http://www.anytimeherbal.com/images/arjuna.gif"));
             catalogs.add(new CatalogEntity(1,"Anthipollen","These drugs unclog your stuffy nose","http://www.anytimeherbal.com/images/arjuna.gif"));
+            */
 
-
+            List<ProductCatalog> catalogs = ProductCatalogService.getAllByUserAllergy(UserService.getCurrentUser().getIduser());
             return catalogs;
         }
 
         @Override
-        protected void onPostExecute(List<CatalogEntity> result) {
+        protected void onPostExecute(List<ProductCatalog> result) {
             super.onPostExecute(result);
             view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
             catalogs = result;

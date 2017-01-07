@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.allergyiap.R;
 import com.allergyiap.adapters.ViewPagerAdapter;
-import com.allergyiap.entities.CatalogEntity;
+import com.allergyiap.beans.ProductCatalog;
 import com.allergyiap.entities.StationEntity;
 import com.allergyiap.utils.C;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,9 +29,9 @@ public class ProductCatalogMapActivity extends BaseActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private Toolbar toolbar;
-    private CatalogEntity product;
+    private ProductCatalog product;
 
-    public CatalogEntity getProduct(){
+    public ProductCatalog getProduct(){
         return product;
     }
 
@@ -40,7 +40,7 @@ public class ProductCatalogMapActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_catalog_map);
 
-        product = (CatalogEntity)getIntent().getSerializableExtra(C.IntentExtra.Sender.VAR_PRODUCT);
+        product = (ProductCatalog)getIntent().getSerializableExtra(C.IntentExtra.Sender.VAR_PRODUCT);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -33,4 +33,8 @@ private static UserDao dao = new UserDao();
 		return dao.isValidLogin(mail, password);
 	}
 
+	public static User getCurrentUser(){
+		return getAll().get(0);
+	}
+
 }

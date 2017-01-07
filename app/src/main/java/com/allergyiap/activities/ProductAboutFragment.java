@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.allergyiap.R;
-import com.allergyiap.entities.CatalogEntity;
+import com.allergyiap.beans.ProductCatalog;
 import com.allergyiap.entities.DownloadImageTask;
 
 /**
@@ -62,17 +62,17 @@ public class ProductAboutFragment extends Fragment {
 
     private void loadData() {
 
-        CatalogEntity product = activity.getProduct();
+        ProductCatalog product = activity.getProduct();
 
-        viewHolder.productName.setText(product.title);
-        viewHolder.productDescription.setText(product.description);
-        new DownloadImageTask(viewHolder.productImage).execute(product.url_image);
+        viewHolder.productName.setText(product.getProduct_name());
+        viewHolder.productDescription.setText(product.getProduct_description());
+        new DownloadImageTask(viewHolder.productImage).execute(product.getProduct_url_image());
         viewHolder.productImage.setImageResource(R.drawable.allergy_product);
 
         //TODO: Find the data of product's company
-        viewHolder.companyName.setText(product.title);
-        viewHolder.companyDescription.setText(product.description);
-        new DownloadImageTask(viewHolder.companyImage).execute(product.url_image);
+        viewHolder.companyName.setText(product.getProduct_name());
+        viewHolder.companyDescription.setText(product.getProduct_description());
+        new DownloadImageTask(viewHolder.companyImage).execute(product.getProduct_url_image());
         viewHolder.companyImage.setImageResource(R.drawable.allergy_product);
 
     }
