@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.allergyiap.R;
+import com.allergyiap.db.DB;
 import com.allergyiap.services.AllergyLevelProxyClass;
 import com.allergyiap.utils.C;
 import com.allergyiap.utils.DBHelper;
@@ -41,6 +42,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }*/
+
+        DB.setCurrentContext(context);
 
         updateLocale();
         if (getSupportActionBar() != null)
