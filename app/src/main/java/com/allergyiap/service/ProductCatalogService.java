@@ -47,6 +47,15 @@ public class ProductCatalogService {
 		return list;
 	}
 
+	public static List<ProductCatalog> getAllByAllergy(long id) {
+		List<ProductCatalog> list = productDao.getByAllergy(id);
+		for (ProductCatalog productCatalog : list) {
+			productCatalog.setAllergy(allergyDao.get(productCatalog.getAllergy_idallergy()));
+			productCatalog.setCustomer(customerDao.get(productCatalog.getCustomer_idcustomer()));
+		}
+		return list;
+	}
+
 	public static List<ProductCatalog> getAll() {
 		List<ProductCatalog> list = productDao.getAll();
 		for (ProductCatalog productCatalog : list) {
