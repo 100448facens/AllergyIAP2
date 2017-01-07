@@ -10,9 +10,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.allergyiap.activities.LocationActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Station's List"/>
+    <include layout="@layout/fragment_recycler"></include>
 
 </RelativeLayout>
