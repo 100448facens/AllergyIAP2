@@ -20,6 +20,10 @@ public class UserDao extends Dao<User>{
 	private static String alarm_weekdays = "alarm_weekdays";
 	private static String alarm_time = "alarm_time";
 
+	public UserDao() {
+		super(TABLE_NAME);
+	}
+
 	@Override
 	public void insert(User bean) {
 		StringBuilder query = new StringBuilder();
@@ -82,6 +86,8 @@ public class UserDao extends Dao<User>{
 
 	@Override
 	public List<User> getAll() {
+		this.updateFromWS(1);
+
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + ";";
 		return select(selectQuery);
 	}

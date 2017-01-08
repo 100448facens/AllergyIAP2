@@ -16,6 +16,9 @@ public class RelationPharmaciesCustomersDao extends Dao<RelationPharmaciesCustom
 	private static String id_customer = "id_customer";
 	private static String id_pharmacy = "id_pharmacy";
 
+	public RelationPharmaciesCustomersDao() {
+		super(TABLE_NAME);
+	}
 	@Override
 	public void insert(RelationPharmaciesCustomers bean) {
 		StringBuilder query = new StringBuilder();
@@ -58,6 +61,8 @@ public class RelationPharmaciesCustomersDao extends Dao<RelationPharmaciesCustom
 
 	@Override
 	public List<RelationPharmaciesCustomers> getAll() {
+		this.updateFromWS(1);
+
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + ";";
 		return select(selectQuery);
 	}

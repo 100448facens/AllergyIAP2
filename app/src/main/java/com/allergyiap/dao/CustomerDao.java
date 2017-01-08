@@ -9,6 +9,9 @@ import com.allergyiap.beans.Customer;
 
 public class CustomerDao extends Dao<Customer> {
 
+	public CustomerDao() {
+		super(TABLE_NAME);
+	}
 	private static final String TABLE_NAME = "customer";
 
 	private static String idcustomer = "idcustomer";
@@ -77,6 +80,7 @@ public class CustomerDao extends Dao<Customer> {
 
 	@Override
 	public List<Customer> getAll() {
+		this.updateFromWS(1);
 
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + ";";
 		return select(selectQuery);
@@ -89,12 +93,12 @@ public class CustomerDao extends Dao<Customer> {
 			ResultSet rs = db.execute(query);
 			while (rs.next()) {
 				long id = rs.getLong(idcustomer);
-				String mail = rs.getString(user_mail);
-				String pass = rs.getString(user_password);
+				//String mail = rs.getString(user_mail);
+				//String pass = rs.getString(user_password);
 				String name = rs.getString(company_name);
 				String url = rs.getString(url_logo);
 				String description = rs.getString(company_description);
-				list.add(new Customer(id, mail, pass, name, url, description));
+				list.add(new Customer(id, "", "", name, url, description));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

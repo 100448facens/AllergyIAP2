@@ -77,6 +77,7 @@ public class ProductCatalogDao extends Dao<ProductCatalog> {
 
 	@Override
 	public List<ProductCatalog> getAll() {
+		this.updateFromWS(1);
 
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + ";";
 		return select(selectQuery);
@@ -106,6 +107,9 @@ public class ProductCatalogDao extends Dao<ProductCatalog> {
 		return list;
 	}
 
+	public ProductCatalogDao() {
+		super(TABLE_NAME);
+	}
 	/* From a customerID, select all his products in the catalog */
 	public List<ProductCatalog> getByCustomer(long id) {
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " + customer_idcustomer + " = " + id + ";";

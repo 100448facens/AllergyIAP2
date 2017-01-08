@@ -95,12 +95,16 @@ public class AllergyLevelDao extends Dao<AllergyLevel> {
 	 */
 	@Override
 	public List<AllergyLevel> getAll() {
+		this.updateFromWS(1);
 
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + ";";
 
 		return select(selectQuery);
 	}
 
+	public AllergyLevelDao() {
+		super(TABLE_NAME);
+	}
 	private List<AllergyLevel> select(String query) {
 		List<AllergyLevel> list = new ArrayList<>();
 

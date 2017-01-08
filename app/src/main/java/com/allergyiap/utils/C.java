@@ -51,9 +51,9 @@ public final class C {
      */
     public static final class Network {
         // HOST
-        public static final String HOST = "";
+        public static final String HOST = "http://10.0.2.2:8080";
         // WebService URL
-        private static final String WS_URL = HOST + "";
+        public static final String WS_URL = HOST + "/AllergyIAPWS/rest/allergyws/";
 
         /**
          * WebService
