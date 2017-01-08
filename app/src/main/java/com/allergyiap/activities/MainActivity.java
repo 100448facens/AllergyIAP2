@@ -105,7 +105,8 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_level:
                 openFragment(LevelAllergyFragment.class);
-                changeTabText(R.string.menu_level);
+                //changeTabText(R.string.menu_level);
+                changeTabText("Lleida");
                 menuItemVisibility[menuItemPosition.SEARCH.ordinal()] = false;
                 menuItemVisibility[menuItemPosition.LOCATION.ordinal()] = true;
                 updateMenu();
@@ -135,6 +136,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void changeTabText(int title) {
+        toolbar.setTitle(title);
+    }
+
+    private void changeTabText(String title) {
         toolbar.setTitle(title);
     }
 

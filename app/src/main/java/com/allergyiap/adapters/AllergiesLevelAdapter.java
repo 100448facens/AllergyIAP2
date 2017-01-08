@@ -17,12 +17,13 @@ import com.allergyiap.service.AllergyService;
 
 import java.util.List;
 
-public class AllergiesLevelAdapter extends RecyclerView.Adapter<AllergiesLevelAdapter.AllergyViewHolder> {
+public class AllergiesLevelAdapter extends RecyclerView.Adapter<AllergiesLevelAdapter.AllergiesLevelViewHolder> {
     Context context;
     OnItemClickListener clickListener;
     List<AllergyLevel> allergies;
 
     public AllergiesLevelAdapter(Context context, List<AllergyLevel> list) {
+        Log.d("LevelAllergyFragment", "AllergiesLevelAdapter:" + list.size());
         this.context = context;
         this.allergies = list;
     }
@@ -34,13 +35,13 @@ public class AllergiesLevelAdapter extends RecyclerView.Adapter<AllergiesLevelAd
     }
 
     @Override
-    public AllergyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public AllergiesLevelViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_allergy_level, viewGroup, false);
-        return new AllergyViewHolder(view);
+        return new AllergiesLevelViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(AllergyViewHolder viewHolder, int i) {
+    public void onBindViewHolder(AllergiesLevelViewHolder viewHolder, int i) {
         AllergyLevel aLevel = allergies.get(i);
 
         Allergy allergy = AllergyService.get(aLevel.getAllergy_idallergy());
@@ -83,7 +84,7 @@ public class AllergiesLevelAdapter extends RecyclerView.Adapter<AllergiesLevelAd
     }
 
 
-    public class AllergyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class AllergiesLevelViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView name;
         TextView status;
@@ -93,7 +94,7 @@ public class AllergiesLevelAdapter extends RecyclerView.Adapter<AllergiesLevelAd
         Allergy allergy;
         View finalView;
 
-        public AllergyViewHolder(View view) {
+        public AllergiesLevelViewHolder(View view) {
             super(view);
             this.finalView = view;
             name = (TextView) view.findViewById(R.id.name);

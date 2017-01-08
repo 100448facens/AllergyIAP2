@@ -138,6 +138,7 @@ public class LevelAllergyFragment extends Fragment {
         protected void onPostExecute(List<AllergyLevel> result) {
             super.onPostExecute(result);
             view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
+            Log.d(TAG, ".onPostExecute LoadAllergyLevelBT");
             loadAdapter(result);
         }
     }

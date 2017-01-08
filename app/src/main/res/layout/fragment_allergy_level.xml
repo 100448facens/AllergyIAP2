@@ -56,7 +56,8 @@
                 android:paddingTop="8dp"
                 android:layout_below="@+id/name"
                 android:textColor="@color/secondary_text_default_material_light"
-                android:textSize="@dimen/abc_text_size_caption_material" />
+                android:textSize="@dimen/abc_text_size_caption_material"
+                android:visibility="gone"/>
         </RelativeLayout>
         <ImageView
             android:id="@+id/icon_status"
