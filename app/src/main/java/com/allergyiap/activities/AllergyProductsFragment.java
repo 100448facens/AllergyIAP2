@@ -124,7 +124,8 @@ public class AllergyProductsFragment extends Fragment {
         @Override
         protected List<ProductCatalog> doInBackground(Void... params) {
 
-            ProductCatalogService.getAllByAllergy(allergy.getIdallergy());
+            //ProductCatalogService.getAllByAllergy(allergy.getIdallergy());
+            ProductCatalogService.getAll();
             return null;
         }
 

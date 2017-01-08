@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_product_catalog_map"
-    tools:context="com.allergyiap.activities.ProductWhereBuyFragment">
+    tools:context="com.allergyiap.activities.ProductWhereBuyFragment"
+    tools:showIn="@layout/activity_product_catalog_map">
 
 
     <com.google.android.gms.maps.MapView

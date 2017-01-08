@@ -2,6 +2,7 @@ package com.allergyiap.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class AllergiesLevelAdapter extends RecyclerView.Adapter<AllergiesLevelAd
     }
 
     public void setAllergies(List<AllergyLevel> list) {
+        Log.d("LevelAllergyFragment", "setAllergies:" + list.size());
         this.allergies = list;
         notifyDataSetChanged();
     }
@@ -46,8 +48,8 @@ public class AllergiesLevelAdapter extends RecyclerView.Adapter<AllergiesLevelAd
         viewHolder.allergyLevel = aLevel;
         viewHolder.allergy = allergy;
         viewHolder.name.setText(allergy.getAllergy_name());
-        viewHolder.status.setText(aLevel.getForecast_level());
-        int resource = 0;
+        //viewHolder.status.setText(aLevel.getForecast_level());
+        int resource = 0, r_status = 0;
         switch((int)aLevel.getCurrent_level()){
             case 0 : resource = R.drawable.legend_level_allergy_null; break;
             case 1 : resource = R.drawable.legend_level_allergy_low; break;
@@ -56,6 +58,22 @@ public class AllergiesLevelAdapter extends RecyclerView.Adapter<AllergiesLevelAd
             case 4 : resource = R.drawable.legend_level_allergy_veryhigh; break;
         }
         viewHolder.image.setImageResource(resource);
+
+        //if(aLevel.getForecast_level().equals("=")){}
+        if(aLevel.getForecast_level().equals("A") || aLevel.getForecast_level().equals(">")){
+            r_status = R.drawable.ic_increase;
+        }
+        if(aLevel.getForecast_level().equals("D") || aLevel.getForecast_level().equals("<")){
+            r_status = R.drawable.ic_decrease;
+        }
+        //if(aLevel.getForecast_level().equals("!")){}
+
+        if(r_status != 0) {
+            viewHolder.image_status.setImageResource(r_status);
+            viewHolder.image_status.setVisibility(View.VISIBLE);
+        } else {
+            viewHolder.image_status.setVisibility(View.GONE);
+        }
 
     }
 
@@ -70,6 +88,7 @@ public class AllergiesLevelAdapter extends RecyclerView.Adapter<AllergiesLevelAd
         TextView name;
         TextView status;
         ImageView image;
+        ImageView image_status;
         AllergyLevel allergyLevel;
         Allergy allergy;
         View finalView;
@@ -80,6 +99,7 @@ public class AllergiesLevelAdapter extends RecyclerView.Adapter<AllergiesLevelAd
             name = (TextView) view.findViewById(R.id.name);
             status = (TextView) view.findViewById(R.id.status);
             image = (ImageView) view.findViewById(R.id.image);
+            image_status = (ImageView) view.findViewById(R.id.icon_status);
             itemView.setOnClickListener(this);
         }
 

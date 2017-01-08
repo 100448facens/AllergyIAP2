@@ -70,8 +70,8 @@ public class ProductCatalogMapActivity extends BaseActivity {
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        adapter.addFrag(new ProductAboutFragment(), getString(R.string.product_tab_wherebuy));
-        adapter.addFrag(new ProductWhereBuyFragment(), getString(R.string.product_tab_about));
+        adapter.addFrag(new ProductWhereBuyFragment(), getString(R.string.product_tab_wherebuy));
+        adapter.addFrag(new ProductAboutFragment(), getString(R.string.product_tab_about));
 
         viewPager.setAdapter(adapter);
 

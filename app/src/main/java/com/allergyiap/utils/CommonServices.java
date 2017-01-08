@@ -20,33 +20,7 @@ public class CommonServices {
 
     static final String TAG = "CommonServices";
 
-    public static final int REQCODE_SETTINGS = 100;
-    public static final int REQCODE_ADD_NOTICE = 200;
-    public static final int REQCODE_USER_PROFILE = 300;
-    public static final int REQCODE_DETAIL_NOTICE = 400;
-    public static final int REQCODE_RELOAD_APP = 500;
-    public static final int REQCODE_CHAT_DETAIL = 600;
-    public static final int REQCODE_CATEG_RESTART = 700;
-    public static final int REQCODE_IMAGE = 800;
-
-    public static final int RESULT_RELOAD_CHATS = 1;
-    public static final int RESULT_LOGIN = 2;
-    public static final int RESULT_RESTART = 3;
-    public static final int RESULT_LOGOUT = 4;
-    public static final int RESULT_ENCUESTA_ANSWERED = 5;
-    public static final int RESULT_LOGOUT_GROUP = 6;
-    public static final int RESULT_IMAGE_CROP = 7;
-
-    public static final int MODE_LOGIN = 1;
-    public static final int MODE_REGISTER = 2;
-    public static final int MODE_RECOVERY = 3;
-    public static final int MODE_PROFILE = 4;
-
-    //public static final int REQUEST_CAMERA = 1;
-    //public static final int REQUEST_GALLERY = 2;
-    public static final String TEMP_IMAGE_FILE = "temp.jpg";
-
-    public static int NUM_MESSAGE = 0;
+    public static final int REQUEST_SIGNUP = 100;
 
     static CommonServices services;
     private Context context;

@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity
         switch (id) {
             case R.id.nav_login:
                 drawer.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(this, LoginActivity.class));
                 break;
             case R.id.nav_level:
                 openFragment(LevelAllergyFragment.class);

@@ -18,7 +18,7 @@
     <item
         android:id="@+id/menu_station"
         android:orderInCategory="100"
-        android:icon="@android:drawable/ic_menu_preferences"
+        android:icon="@drawable/ic_stations_location"
         android:title="@string/menu_info"
         app:showAsAction="collapseActionView|ifRoom" />
 </menu>
