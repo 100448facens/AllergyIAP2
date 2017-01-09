@@ -3,6 +3,8 @@ package com.allergyiap.utils;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.allergyiap.db.DB;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,10 +50,15 @@ public class Util {
         return d.execute(url).get();
     }
 
-    public static String getJson(String file) throws Exception {
-        Context context = DBHelper.getCurrentContext();
-        InputStream s = context.getAssets().open(file);
-        return Util.convertStreamToString(s);
+    public static String getFile(String file) {
+        try {
+            Context context = DB.getCurrentContext();
+            InputStream s = context.getAssets().open(file);
+            return Util.convertStreamToString(s);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "";
     }
 
     public static String convertStreamToString(InputStream is) throws Exception {

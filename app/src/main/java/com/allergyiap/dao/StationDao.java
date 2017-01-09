@@ -16,6 +16,9 @@ public class StationDao extends Dao<Station> {
 	private static String latitude = "latitude";
 	private static String longitude = "longitude";
 
+	public StationDao() {
+		super(TABLE_NAME);
+	}
 	@Override
 	public void insert(Station bean) {
 		StringBuilder query = new StringBuilder();
@@ -54,6 +57,8 @@ public class StationDao extends Dao<Station> {
 
 	@Override
 	public List<Station> getAll() {
+		this.updateFromWS(1);
+
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + ";";
 		return select(selectQuery);
 	}

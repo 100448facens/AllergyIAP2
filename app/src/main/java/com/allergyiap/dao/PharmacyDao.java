@@ -69,10 +69,15 @@ public class PharmacyDao extends Dao<Pharmacy> {
 
 	@Override
 	public List<Pharmacy> getAll() {
+		this.updateFromWS(1);
+
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + ";";
 		return select(selectQuery);
 	}
 
+	public PharmacyDao() {
+		super(TABLE_NAME);
+	}
 	private List<Pharmacy> select(String query) {
 		List<Pharmacy> list = new ArrayList<>();
 		try {

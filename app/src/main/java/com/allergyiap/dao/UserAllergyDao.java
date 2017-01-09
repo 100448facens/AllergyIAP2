@@ -18,6 +18,10 @@ public class UserAllergyDao extends Dao<UserAllergy> {
 	private static String id_user = "id_user";
 	private static String id_allergy = "id_allergy";
 
+	public UserAllergyDao() {
+		super(TABLE_NAME);
+	}
+
 	@Override
 	public void insert(UserAllergy bean) {
 		StringBuilder query = new StringBuilder();
@@ -60,6 +64,8 @@ public class UserAllergyDao extends Dao<UserAllergy> {
 
 	@Override
 	public List<UserAllergy> getAll() {
+		this.updateFromWS(1);
+
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + ";";
 		return select(selectQuery);
 	}
