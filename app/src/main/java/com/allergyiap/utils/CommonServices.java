@@ -21,6 +21,7 @@ public class CommonServices {
     static final String TAG = "CommonServices";
 
     public static final int REQUEST_SIGNUP = 100;
+    public static final int PERMISSIONS_REQUEST_ACCESS_LOCATION = 200;
 
     static CommonServices services;
     private Context context;
