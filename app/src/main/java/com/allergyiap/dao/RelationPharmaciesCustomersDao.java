@@ -61,13 +61,13 @@ public class RelationPharmaciesCustomersDao extends Dao<RelationPharmaciesCustom
 
 	@Override
 	public List<RelationPharmaciesCustomers> getAll() {
-		this.updateFromWS(1);
 
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + ";";
 		return select(selectQuery);
 	}
 
 	private List<RelationPharmaciesCustomers> select(String query) {
+		this.updateFromWS(1);
 		List<RelationPharmaciesCustomers> list = new ArrayList<>();
 		try {
 

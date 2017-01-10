@@ -42,6 +42,7 @@ public class AllergiesLevelAdapter extends RecyclerView.Adapter<AllergiesLevelAd
 
     @Override
     public void onBindViewHolder(AllergiesLevelViewHolder viewHolder, int i) {
+        Log.d("LevelAllergyFragment", "onBindViewHolder:" + i);
         AllergyLevel aLevel = allergies.get(i);
 
         Allergy allergy = AllergyService.get(aLevel.getAllergy_idallergy());

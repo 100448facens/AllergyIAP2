@@ -64,13 +64,13 @@ public class UserAllergyDao extends Dao<UserAllergy> {
 
 	@Override
 	public List<UserAllergy> getAll() {
-		this.updateFromWS(1);
 
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + ";";
 		return select(selectQuery);
 	}
 
 	private List<UserAllergy> select(String query) {
+		this.updateFromWS(1);
 		List<UserAllergy> list = new ArrayList<>();
 		try {
 

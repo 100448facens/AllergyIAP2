@@ -86,13 +86,13 @@ public class UserDao extends Dao<User>{
 
 	@Override
 	public List<User> getAll() {
-		this.updateFromWS(1);
 
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + ";";
 		return select(selectQuery);
 	}
 	
 	private List<User> select(String query) {
+		this.updateFromWS(1);
 		List<User> list = new ArrayList<>();
 
 		try {

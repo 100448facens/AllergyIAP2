@@ -3,8 +3,6 @@ package com.allergyiap.utils;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.icu.util.Calendar;
-import android.icu.util.GregorianCalendar;
 import android.preference.DialogPreference;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
@@ -13,7 +11,9 @@ import android.widget.TimePicker;
 
 import com.allergyiap.R;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 public class TimePreference extends DialogPreference {

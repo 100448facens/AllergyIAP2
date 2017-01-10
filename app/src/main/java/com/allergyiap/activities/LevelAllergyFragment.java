@@ -77,6 +77,7 @@ public class LevelAllergyFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+        Log.d(TAG, ".onDestroyView");
         super.onDestroyView();
 
         adapter = null;
@@ -94,6 +95,11 @@ public class LevelAllergyFragment extends Fragment {
 
     private void loadAdapter(final List<AllergyLevel> list) {
         Log.d(TAG, ".loadAdapter");
+
+        recyclerView = (RecyclerView) activity.findViewById(R.id.scrollableview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setHasFixedSize(true);
 
         if (adapter == null)
             adapter = new AllergiesLevelAdapter(context, list);

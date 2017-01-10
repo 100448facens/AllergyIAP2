@@ -77,7 +77,6 @@ public class ProductCatalogDao extends Dao<ProductCatalog> {
 
 	@Override
 	public List<ProductCatalog> getAll() {
-		this.updateFromWS(1);
 
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + ";";
 		return select(selectQuery);
@@ -85,6 +84,7 @@ public class ProductCatalogDao extends Dao<ProductCatalog> {
 
 	private List<ProductCatalog> select(String query) {
 		List<ProductCatalog> list = new ArrayList<>();
+		this.updateFromWS(1);
 
 		try {
 

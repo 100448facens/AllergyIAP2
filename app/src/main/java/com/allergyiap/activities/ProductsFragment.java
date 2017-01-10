@@ -91,6 +91,11 @@ public class ProductsFragment extends Fragment {
     private void loadAdapter(final List<ProductCatalog> list) {
         Log.d(TAG, ".loadAdapter");
 
+        recyclerView = (RecyclerView) view.findViewById(R.id.scrollableview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setHasFixedSize(true);
+
         if (adapter == null)
             adapter = new CatalogAdapter(context, list);
         else

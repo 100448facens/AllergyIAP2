@@ -57,13 +57,13 @@ public class StationDao extends Dao<Station> {
 
 	@Override
 	public List<Station> getAll() {
-		this.updateFromWS(1);
 
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + ";";
 		return select(selectQuery);
 	}
 
 	private List<Station> select(String query) {
+		this.updateFromWS(1);
 		List<Station> list = new ArrayList<>();
 		try {
 

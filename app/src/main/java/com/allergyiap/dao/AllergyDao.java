@@ -74,12 +74,12 @@ public class AllergyDao extends Dao<Allergy> {
 
     @Override
     public List<Allergy> getAll() {
-        this.updateFromWS(1);
         String selectQuery = "SELECT * FROM " + TABLE_NAME + ";";
         return select(selectQuery);
     }
 
     private List<Allergy> select(String query) {
+        this.updateFromWS(1);
         List<Allergy> list = new ArrayList<>();
 
         try {

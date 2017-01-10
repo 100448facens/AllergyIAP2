@@ -2,6 +2,7 @@ package com.allergyiap.utils;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.allergyiap.db.DB;
 
@@ -25,20 +26,24 @@ import java.util.Map;
 
 public class Util {
     public static class DownloadTask extends AsyncTask<URL, Void, String> {
+        public String getUrl(URL url){
+            HttpURLConnection urlConnection = null;
+            try {
+                urlConnection = (HttpURLConnection) url.openConnection();
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                return Util.convertStreamToString(in);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                urlConnection.disconnect();
+            }
+            return "";
+        }
         protected String doInBackground(URL... urls) {
             int count = urls.length;
             if (count > 0) {
                 URL url = urls[0];
-                HttpURLConnection urlConnection = null;
-                try {
-                    urlConnection = (HttpURLConnection) url.openConnection();
-                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                    return Util.convertStreamToString(in);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    urlConnection.disconnect();
-                }
+                return getUrl(url);
             }
             return "";
         }
@@ -47,7 +52,8 @@ public class Util {
     public static String getUrl(String urlStr) throws Exception {
         java.net.URL url = new URL(urlStr);
         DownloadTask d = new DownloadTask();
-        return d.execute(url).get();
+        return d.getUrl(url);
+        //return d.execute(url).get();
     }
 
     public static String getFile(String file) {

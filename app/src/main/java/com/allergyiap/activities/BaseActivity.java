@@ -10,6 +10,7 @@ import android.view.WindowManager;
 
 import com.allergyiap.R;
 import com.allergyiap.db.DB;
+import com.allergyiap.service.AllergyService;
 import com.allergyiap.services.AllergyLevelProxyClass;
 import com.allergyiap.utils.C;
 import com.allergyiap.utils.DBHelper;
@@ -33,16 +34,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         context = getApplicationContext();
-        /*db = DBHelper.getDBHelper(context);
-
-        try {
-            Log.d("TESTE10", "STARTING");
-            List<?> l=AllergyLevelProxyClass.getLevels(AllergyLevelProxyClass.getStations().get(0).id);
-            Log.d("TESTE10", String.valueOf(l.size()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-
         DB.setCurrentContext(context);
 
         updateLocale();

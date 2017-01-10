@@ -80,13 +80,13 @@ public class CustomerDao extends Dao<Customer> {
 
 	@Override
 	public List<Customer> getAll() {
-		this.updateFromWS(1);
 
 		String selectQuery = "SELECT * FROM " + TABLE_NAME + ";";
 		return select(selectQuery);
 	}
 
 	private List<Customer> select(String query) {
+		this.updateFromWS(1);
 		List<Customer> list = new ArrayList<>();
 		try {
 

@@ -13,6 +13,15 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.allergyiap.R;
+import com.allergyiap.service.AllergyLevelService;
+import com.allergyiap.service.AllergyService;
+import com.allergyiap.service.CustomerService;
+import com.allergyiap.service.PharmacyService;
+import com.allergyiap.service.ProductCatalogService;
+import com.allergyiap.service.RelationPharmaciesCustomersService;
+import com.allergyiap.service.StationService;
+import com.allergyiap.service.UserAllergyService;
+import com.allergyiap.service.UserService;
 import com.allergyiap.utils.CommonServices;
 import com.allergyiap.utils.LocationService;
 
@@ -112,6 +121,16 @@ public class LaunchScreenActivity extends BaseActivity {
         protected Boolean doInBackground(Void... params) {
 
             try {
+                AllergyService.getAll();
+                AllergyLevelService.getAll();
+                CustomerService.getAll();
+                PharmacyService.getAll();
+                ProductCatalogService.getAll();
+                RelationPharmaciesCustomersService.getAll();
+                StationService.getAll();
+                UserAllergyService.getAll();
+                UserService.getAll();
+
                 //Thread.sleep(3000); //solo para pruebas
                 //check Internet
                 //if (!CommonServices.getInstance(context).checkInternet())

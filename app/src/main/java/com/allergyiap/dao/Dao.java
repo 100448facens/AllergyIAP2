@@ -1,5 +1,7 @@
 package com.allergyiap.dao;
 
+import android.util.Log;
+
 import com.allergyiap.db.DB;
 import com.allergyiap.utils.C;
 import com.allergyiap.utils.Util;
@@ -35,6 +37,7 @@ public abstract class Dao<T> {
                     JSONObject keyValue = jsonObj.getJSONObject(i);
                     db.insertJson(keyValue, this.entityName);
                 }
+                db.setLastUpdateToNow(this.entityName);
             } catch (Exception e) {
                 e.printStackTrace();
             }

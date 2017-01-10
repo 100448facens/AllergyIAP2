@@ -46,13 +46,14 @@ public class MainActivity extends AppCompatActivity
         for (int i = 0; i < menuItemPosition.values().length; i++)
             menuItemVisibility[i] = false;
 
+        changeTabText("Lleida");
         navigationView.setCheckedItem(R.id.nav_level);
         navigationView.getMenu().performIdentifierAction(R.id.nav_level, 0);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
