@@ -1,5 +1,7 @@
 package com.allergyiap.activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,11 +12,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.allergyiap.R;
 import com.allergyiap.entities.ProductCatalogEntity;
+import com.allergyiap.utils.ReceiveAlarm;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,6 +39,8 @@ public class MainActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setTitle("Lleida");
+
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -46,9 +54,10 @@ public class MainActivity extends AppCompatActivity
         for (int i = 0; i < menuItemPosition.values().length; i++)
             menuItemVisibility[i] = false;
 
-        changeTabText("Lleida");
+
         navigationView.setCheckedItem(R.id.nav_level);
         navigationView.getMenu().performIdentifierAction(R.id.nav_level, 0);
+
     }
 
     @Override

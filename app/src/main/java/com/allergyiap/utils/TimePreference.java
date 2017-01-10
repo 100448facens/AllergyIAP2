@@ -36,6 +36,17 @@ public class TimePreference extends DialogPreference {
         calendar = new GregorianCalendar();
     }
 
+    public static int getHour(String tempo) {
+        String[] fragmentos = tempo.split(":");
+        return Integer.parseInt(fragmentos[0]);
+    }
+
+    public static int getMinute(String tempo) {
+        String[] fragmentos = tempo.split(":");
+        return Integer.parseInt(fragmentos[1]);
+    }
+
+
     @Override
     protected View onCreateDialogView() {
         picker = new TimePicker(getContext());

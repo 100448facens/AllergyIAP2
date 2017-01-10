@@ -2,8 +2,11 @@ package com.allergyiap.activities;
 
 
 import android.annotation.TargetApi;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -13,14 +16,18 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.SwitchPreference;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.allergyiap.R;
+import com.allergyiap.utils.ReceptorBoot;
+import com.allergyiap.utils.TimePreference;
 
 import java.util.List;
 
@@ -79,10 +86,24 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     }
                 }
 
+            } else if(preference instanceof TimePreference) {
+                ReceptorBoot.cancelAlarm(preference.getContext());
+                ReceptorBoot.initAlarm(preference.getContext());
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
                 preference.setSummary(stringValue);
+
+                if ("notifications_new_message".equals(stringValue)) {
+
+                    boolean switched = ((SwitchPreference) preference).isChecked();
+
+                    if (switched) {
+                        ReceptorBoot.initAlarm(preference.getContext());
+                    } else {
+                        ReceptorBoot.cancelAlarm(preference.getContext());
+                    }
+                }
             }
             return true;
         }
@@ -109,13 +130,22 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     private static void bindPreferenceSummaryToValue(Preference preference) {
         // Set the listener to watch for value changes.
         preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
-
+        Log.d("", "preference.getKey() " + preference.getKey());
         // Trigger the listener immediately with the preference's
         // current value.
-        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
-                PreferenceManager
-                        .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), ""));
+
+        SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
+        String name = preference.getKey();
+        Object aux;
+        if(preference instanceof SwitchPreference) {
+            aux = shared.getBoolean(name, Boolean.FALSE);
+        } else if(preference instanceof TimePreference) {
+            aux = shared.getLong(name, 0);
+        } else {
+            aux = shared.getString(name, "");
+        }
+
+        sBindPreferenceSummaryToValueListener.onPreferenceChange(preference, aux);
     }
 
     @Override
@@ -182,8 +212,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            //bindPreferenceSummaryToValue(findPreference("example_text"));
-            //bindPreferenceSummaryToValue(findPreference("example_list"));
+            bindPreferenceSummaryToValue(findPreference("notifications_new_message"));
+            bindPreferenceSummaryToValue(findPreference("days_week"));
+            bindPreferenceSummaryToValue(findPreference("time_alarm"));
         }
 
         @Override

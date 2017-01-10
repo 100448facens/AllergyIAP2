@@ -1,5 +1,7 @@
 package com.allergyiap.activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationListener;
@@ -25,6 +27,8 @@ import com.allergyiap.service.UserService;
 import com.allergyiap.utils.CommonServices;
 import com.allergyiap.utils.LocationService;
 
+import java.util.Calendar;
+
 /**
  * Created by David on 06/01/2017.
  * <p>
@@ -49,7 +53,7 @@ public class LaunchScreenActivity extends BaseActivity {
 
         setContentView(R.layout.activity_launch_screen);
 
-        if(checkPermissionLocation()){
+        if (checkPermissionLocation()) {
             task = new BackgroundTask().execute();
         }
     }
@@ -89,6 +93,7 @@ public class LaunchScreenActivity extends BaseActivity {
     }
 
     public void showResult() {
+
         Intent intent = new Intent(LaunchScreenActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
