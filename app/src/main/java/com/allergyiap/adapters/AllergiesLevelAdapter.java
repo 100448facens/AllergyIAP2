@@ -68,7 +68,9 @@ public class AllergiesLevelAdapter extends RecyclerView.Adapter<AllergiesLevelAd
         if(aLevel.getForecast_level().equals("D") || aLevel.getForecast_level().equals("<")){
             r_status = R.drawable.ic_decrease;
         }
-        //if(aLevel.getForecast_level().equals("!")){}
+        if(aLevel.getForecast_level().equals("!")){
+            r_status = R.drawable.ic_warning;
+        }
 
         if(r_status != 0) {
             viewHolder.image_status.setImageResource(r_status);

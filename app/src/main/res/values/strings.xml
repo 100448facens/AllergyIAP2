@@ -1,5 +1,7 @@
 <resources>
 
+    <string translatable="false" name="apps_link">http://url.app/store.php</string>
+
     <string name="app_name">AllergyIAP</string>
     <string name="menu_login">Login</string>
     <string name="menu_signup">SignUp</string>
@@ -76,6 +78,8 @@
     <string name="pref_title_hour">Hour</string>
 
     <string name="pref_title_daysweek">Days of week</string>
+    <string name="pref_summary_daysweek">Days that the notification will working</string>
+
     <string-array name="pref_sync_daysweek_titles">
         <item>Sunday</item>
         <item>Monday</item>
@@ -114,7 +118,8 @@
     <!-- Example settings for Notifications -->
     <string name="pref_header_notifications">Notifications</string>
 
-    <string name="pref_title_new_message_notifications">Enable</string>
+    <string name="pref_title_new_message_notifications">Receive </string>
+    <string name="pref_summary_new_message_notifications">Notifications of new allergies</string>
 
     <string name="pref_title_ringtone">Ringtone</string>
     <string name="pref_ringtone_silent">Silent</string>
@@ -123,5 +128,24 @@
     <string name="title_activity_my_allergies">My Allergies</string>
     <string name="title_activity_location">Stations</string>
     <string name="title_activity_help">Help</string>
+
+    <string name="prefs_app_category">App</string>
+    <string name="prefs_app_share">Share de app</string>
+    <string name="prefs_app_share_description" formatted="false">Click to send the download link</string>
+
+    <string name="group_medicament">Drugs</string>
+    <string name="map_name">Allergy Map</string>
+
+
+    <!-- Compartir app -->
+
+    <!-- args: app_name -->
+    <string name="mail_share_app_subject" formatted="false">¡Download %s!</string>
+    <!-- args: app_name, android_link, iphone_link -->
+    <string name="mail_share_app_body" formatted="false">Hi,\n\n¡Download the app in %s!\n\n. To Android or iPhone: %s</string>
+
+    <string name="share_dialog_title">Share</string>
+
+    <string name="progress_dialog_message">Wait, updating data!</string>
 
 </resources>

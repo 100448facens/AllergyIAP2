@@ -2,11 +2,10 @@
 
     <PreferenceCategory android:title="Notifications">
 
-        <!-- A 'parent' preference, which enables/disables child preferences (below)
-            when checked/unchecked. -->
         <SwitchPreference
             android:defaultValue="false"
-            android:key="notifications_new_message"
+            android:key="prefs.notification.enabled"
+            android:summary="@string/pref_summary_new_message_notifications"
             android:title="@string/pref_title_new_message_notifications" />
 
         <!-- Allows the user to choose a ringtone in the 'notification' category. -->
@@ -14,61 +13,26 @@
         <!-- NOTE: RingtonePreference's summary should be set to its value by the activity code. -->
         <RingtonePreference
             android:defaultValue="content://settings/system/notification_sound"
-            android:dependency="notifications_new_message"
-            android:key="notifications_new_message_ringtone"
+            android:dependency="prefs.notification.enabled"
+            android:key="prefs.notification.sound"
             android:ringtoneType="notification"
             android:title="@string/pref_title_ringtone" />
 
         <!-- NOTE: This preference will be enabled only when the checkbox above is checked. -->
         <SwitchPreference
             android:defaultValue="true"
-            android:dependency="notifications_new_message"
-            android:key="notifications_new_message_vibrate"
+            android:dependency="prefs.notification.enabled"
+            android:key="prefs.notification.vibration"
             android:title="@string/pref_title_vibrate" />
 
-        <!--SwitchPreference
-            android:defaultValue="true"
-            android:key="example_switch"
-            android:summary="@string/pref_description_social_recommendations"
-            android:title="@string/pref_title_social_recommendations" /-->
-
-        <!-- NOTE: EditTextPreference accepts EditText attributes. -->
-        <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
-        <!--EditTextPreference
-            android:capitalize="words"
-            android:defaultValue="@string/pref_default_display_name"
-            android:inputType="textCapWords"
-            android:key="example_text"
-            android:maxLines="1"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:title="@string/pref_title_display_name" /-->
-
-        <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
-             dismiss it. -->
-        <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
-        <!--ListPreference
-            android:defaultValue="-1"
-            android:entries="@array/pref_example_list_titles"
-            android:entryValues="@array/pref_example_list_values"
-            android:key="example_list"
-            android:negativeButtonText="@null"
-            android:positiveButtonText="@null"
-            android:title="@string/pref_title_add_friends_to_messages" /-->
-
-
-        <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
-             dismiss it. -->
-        <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
-        <ListPreference
-            android:dependency="notifications_new_message"
-            android:defaultValue="180"
+        <MultiSelectListPreference
+            android:dependency="prefs.notification.enabled"
             android:entries="@array/pref_sync_daysweek_titles"
             android:entryValues="@array/pref_sync_daysweek_values"
-            android:key="days_week"
-            android:negativeButtonText="@null"
-            android:positiveButtonText="@null"
-            android:title="@string/pref_title_daysweek" />
+            android:key="prefs.notification.days_week"
+            android:dialogTitle="@string/pref_title_daysweek"
+            android:title="@string/pref_title_daysweek"
+            android:summary="@string/pref_summary_daysweek"/>
 
         <!-- This preference simply launches an intent when selected. Use this UI sparingly, per
              design guidelines. -->
@@ -77,9 +41,28 @@
         </Preference-->
 
         <com.allergyiap.utils.TimePreference
-            android:dependency="notifications_new_message"
+            android:dependency="prefs.notification.enabled"
             android:key="time_alarm"
             android:title="@string/pref_title_hour"/>
 
+    </PreferenceCategory>
+
+    <!-- APP -->
+
+    <PreferenceCategory android:title="@string/prefs_app_category">
+        <!--
+        <Preference
+            android:key="prefs.app.desktop"
+            android:title="@string/prefs_app_desktop" />
+        -->
+        <Preference
+            android:key="prefs.app.share"
+            android:summary="@string/prefs_app_share_description"
+            android:title="@string/prefs_app_share" />
+        <!--
+        <Preference
+            android:key="prefs.app.contact"
+            android:title="@string/prefs_app_contact" />
+        -->
     </PreferenceCategory>
 </PreferenceScreen>

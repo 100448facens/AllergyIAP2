@@ -26,6 +26,7 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import com.allergyiap.R;
+import com.allergyiap.utils.A;
 import com.allergyiap.utils.ReceptorBoot;
 import com.allergyiap.utils.TimePreference;
 
@@ -94,7 +95,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 // simple string representation.
                 preference.setSummary(stringValue);
 
-                if ("notifications_new_message".equals(stringValue)) {
+                if (stringValue.equals("prefs.notification.enabled")) {
 
                     boolean switched = ((SwitchPreference) preference).isChecked();
 
@@ -104,6 +105,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                         ReceptorBoot.cancelAlarm(preference.getContext());
                     }
                 }
+
             }
             return true;
         }
@@ -212,9 +214,19 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            bindPreferenceSummaryToValue(findPreference("notifications_new_message"));
-            bindPreferenceSummaryToValue(findPreference("days_week"));
+            //bindPreferenceSummaryToValue(findPreference("prefs.notification.enabled"));
+            bindPreferenceSummaryToValue(findPreference("prefs.notification.sound"));
+            //bindPreferenceSummaryToValue(findPreference("days_week"));
             bindPreferenceSummaryToValue(findPreference("time_alarm"));
+
+            findPreference("prefs.app.share").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override public boolean onPreferenceClick(Preference preference) {
+                    String subject = String.format(getContext().getString(R.string.mail_share_app_subject), getContext().getString(R.string.app_name));
+                    String message = String.format(getContext().getString(R.string.mail_share_app_body), getContext().getString(R.string.app_name), getContext().getString(R.string.apps_link));
+                    A.startShareText(getContext(), subject, message);
+                    return true;
+                }
+            });
         }
 
         @Override
@@ -227,5 +239,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             }
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * Share app click event
+     */
+    private void shareAppListener() {
+
     }
 }

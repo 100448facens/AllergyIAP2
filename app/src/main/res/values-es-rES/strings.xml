@@ -40,4 +40,42 @@
     <string name="menu_search">Buscar</string>
     <string name="menu_signin">Login</string>
 
+    <string name="prefs_app_category">App</string>
+    <string name="prefs_app_share">Compartir la aplicación</string>
+    <string name="prefs_app_share_description" formatted="false">Pulsa para enviar el enlace de descarga</string>
+
+
+    <string name="allergy_tab_about">Sobre</string>
+    <string name="allergy_tab_products">Productos</string>
+    <string name="allow_alarm">Alarma notificacón</string>
+    <string name="allow_sounds">Habilitar sonidos</string>
+    <string name="cancel">Cancelar</string>
+    <string name="dialog_allergies_title">Seleccione las alergias</string>
+    <string name="dialog_hour_title">Seleccione la hora</string>
+    <string name="dialog_week_days_title">Seleccione los dias de la semana</string>
+    <string name="group_about">Sobre esta app</string>
+    <string name="group_allergy_about">Descripción</string>
+    <string name="group_information">Información legal</string>
+    <string name="group_legend">Leyenda</string>
+    <string name="pref_title_hour">Hora</string>
+    <string name="pref_title_new_message_notifications">Habilitar</string>
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_title_social_recommendations"></string>
+    <string name="pref_title_vibrate">Vibrar</string>
+    <string name="ok">Ok</string>
+    <string name="notify_level_increase">Notificar cuando haya cambio en los niveles de alergias</string>
+    <string name="menu_share">Compartir</string>
+    <string name="menu_signup">Registrarte</string>
+
+
+    <!-- Compartir app -->
+
+    <!-- args: app_name -->
+    <string name="mail_share_app_subject" formatted="false">¡Descárgate %s!</string>
+    <!-- args: app_name, android_link, iphone_link -->
+    <string name="mail_share_app_body" formatted="false">Hola,\n\n¡Descárgate la app de %s!\n\nEstá disponible en Android y iPhone: %s</string>
+    <string name="share_dialog_title">Compartir</string>
+
+    <string name="progress_dialog_message">Aguarde, actualizando los datos</string>
+
 </resources>

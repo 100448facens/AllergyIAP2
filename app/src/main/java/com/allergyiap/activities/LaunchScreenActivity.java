@@ -2,6 +2,7 @@ package com.allergyiap.activities;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationListener;
@@ -13,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.allergyiap.R;
 import com.allergyiap.service.AllergyLevelService;
@@ -26,6 +28,7 @@ import com.allergyiap.service.UserAllergyService;
 import com.allergyiap.service.UserService;
 import com.allergyiap.utils.CommonServices;
 import com.allergyiap.utils.LocationService;
+import com.allergyiap.utils.Prefs;
 
 import java.util.Calendar;
 
@@ -40,6 +43,7 @@ public class LaunchScreenActivity extends BaseActivity {
     private AsyncTask<Void, Void, Boolean> task;
     private LocationManager locationManager;
     private LocationListener locationListener;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,13 @@ public class LaunchScreenActivity extends BaseActivity {
         //getSupportActionBar().hide();
 
         setContentView(R.layout.activity_launch_screen);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMax(100);
+        progressDialog.setMessage(getString(R.string.progress_dialog_message));
+        progressDialog.setTitle(getString(R.string.app_name));
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.show();
 
         if (checkPermissionLocation()) {
             task = new BackgroundTask().execute();
@@ -94,9 +105,12 @@ public class LaunchScreenActivity extends BaseActivity {
 
     public void showResult() {
 
-        Intent intent = new Intent(LaunchScreenActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        //if (Prefs.getInstance(this).getAllergies().size() > 0) {
+
+            Intent intent = new Intent(LaunchScreenActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        //}
     }
 
     private boolean checkPermissionLocation() {
@@ -127,16 +141,25 @@ public class LaunchScreenActivity extends BaseActivity {
 
             try {
                 AllergyService.getAll();
+                progressDialog.incrementProgressBy(10);
                 AllergyLevelService.getAll();
+                progressDialog.incrementProgressBy(20);
                 CustomerService.getAll();
+                progressDialog.incrementProgressBy(30);
                 PharmacyService.getAll();
+                progressDialog.incrementProgressBy(40);
                 ProductCatalogService.getAll();
+                progressDialog.incrementProgressBy(50);
                 RelationPharmaciesCustomersService.getAll();
+                progressDialog.incrementProgressBy(60);
                 StationService.getAll();
+                progressDialog.incrementProgressBy(70);
                 UserAllergyService.getAll();
+                progressDialog.incrementProgressBy(80);
                 UserService.getAll();
+                progressDialog.incrementProgressBy(90);
 
-                //Thread.sleep(3000); //solo para pruebas
+                //Thread.sleep(5000); //solo para pruebas
                 //check Internet
                 //if (!CommonServices.getInstance(context).checkInternet())
                 //    return null;
@@ -144,6 +167,8 @@ public class LaunchScreenActivity extends BaseActivity {
                 //check if google services its ok
                 if (!CommonServices.getInstance(context).checkServicesGoogle(LaunchScreenActivity.this))
                     return Boolean.FALSE;
+
+                progressDialog.dismiss();
 
                 return Boolean.TRUE;
             } catch (Exception e) {
