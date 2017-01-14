@@ -34,6 +34,14 @@ public class UserAllergyService {
         return dao.getTheUserHasThisAllergy(UserService.getCurrentUser().getIduser(), idallergy);
     }
 
+    public static void setAllergyToTheCurrentUser(long idallergy,boolean checked){
+        if(checked){
+            dao.setAllergyToUser(UserService.getCurrentUser().getIduser(),idallergy);
+        }else {
+            dao.unsetAllergyToUser(UserService.getCurrentUser().getIduser(),idallergy);
+        }
+    }
+
     public static List<UserAllergy> getAll() {
         return dao.getAll();
     }
