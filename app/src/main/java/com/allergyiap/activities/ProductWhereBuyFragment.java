@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.allergyiap.R;
+import com.allergyiap.beans.Pharmacy;
+import com.allergyiap.service.PharmacyService;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -20,6 +22,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -84,7 +88,11 @@ public class ProductWhereBuyFragment extends Fragment implements OnMapReadyCallb
     }
 
     private void loadData() {
-        //TODO: Load All pharmacies location
+
+        List<Pharmacy> pharmacies = PharmacyService.getAll();
+        for (Pharmacy p : pharmacies) {
+            createMarker(p.getLatitude(), p.getLongitude(), p.getName_pharmacy());
+        }
     }
 
     private Marker createMarker(double latitude, double longitude, String title) {

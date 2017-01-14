@@ -5,7 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckedTextView;
+
+import android.widget.TextView;
 
 import com.allergyiap.R;
 import com.allergyiap.beans.Allergy;
@@ -50,12 +51,12 @@ public class StationAdapter extends RecyclerView.Adapter<StationAdapter.StationV
 
     public class StationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        CheckedTextView name;
+        TextView name;
         Station station;
 
         public StationViewHolder(View view) {
             super(view);
-            name = (CheckedTextView) view.findViewById(R.id.chk_name);
+            name = (TextView) view.findViewById(R.id.chk_name);
             //itemView.setOnClickListener(this);
             name.setOnClickListener(this);
         }
