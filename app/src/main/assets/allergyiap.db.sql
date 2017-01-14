@@ -2,6 +2,7 @@ BEGIN TRANSACTION;
 CREATE TABLE user_information (
     iduser INTEGER PRIMARY KEY AUTOINCREMENT,
     user_name text DEFAULT '' NOT NULL,
+    device_key text DEFAULT '' NOT NULL,
     user_second_name text DEFAULT '' NOT NULL,
     user_mail text NOT NULL,
     user_password text DEFAULT '' NOT NULL,
@@ -9,6 +10,8 @@ CREATE TABLE user_information (
     alarm_weekdays text DEFAULT '' NOT NULL,
     alarm_time time without time zone
 );
+INSERT INTO user_information(iduser,user_name,user_mail,user_station_default,alarm_time) VALUES (-1,'Guest','guest@allergyiap.com',-1,'0:00');
+
 CREATE TABLE user_allergies (
     id_user integer NOT NULL,
     id_allergy integer NOT NULL,
@@ -61,8 +64,7 @@ CREATE TABLE allergy (
     allergy_code text
 );
 
-INSERT INTO `station` VALUES (-1,'Default',0,0);
-INSERT INTO `user_information` VALUES (-1,'Guest','User','guest@allergyiap.com','',-1,'','0:00');
+INSERT INTO station VALUES (-1,'Default',0,0);
 
 CREATE TABLE IF NOT EXISTS data_version (iddata_version INTEGER PRIMARY KEY AUTOINCREMENT , name TEXT , last_update DATE);
 
