@@ -10,7 +10,7 @@
     card_view:cardCornerRadius="0dp"
     card_view:cardElevation="@dimen/cardview_default_elevation">
 
-    <LinearLayout
+    <!--LinearLayout
         android:id="@+id/linear_check"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,11 +33,33 @@
             android:textSize="@dimen/abc_text_size_medium_material" />
 
 
-    </LinearLayout>
-    <View
+    </LinearLayout-->
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/grey_20"
-        />
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <TextView
+            android:gravity="center_vertical"
+            android:id="@+id/chk_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+
+            android:text="Teste"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/chk_name"/>
+
+        <!--View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/grey_20" /-->
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>

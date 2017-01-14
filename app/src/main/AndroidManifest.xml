@@ -2,11 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.allergyiap">
 
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <!--Permission for ACCESS_COARSE_LOCATION allows access only to NETWORK_PROVIDER.-->
-    <!--uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /-->
+    <!-- Permission for ACCESS_COARSE_LOCATION allows access only to NETWORK_PROVIDER. -->
+    <!-- uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" / -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- Needed only if your app targets Android 5.0 (API level 21) or higher. -->
     <uses-feature android:name="android.hardware.location.gps" />
@@ -19,7 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
         <!-- To receive notifications in apps. This is absolutely necessary for android push notifications to work while the app is not active. -->
         <service android:name=".utils.FCMService">
             <intent-filter>
@@ -27,24 +26,20 @@
             </intent-filter>
         </service>
         <!-- will be used to handle the registration token lifecycle. This is required for sending messages to specific devices/device groups -->
-        <service
-            android:name=".utils.FCMInstanceIDService">
+        <service android:name=".utils.FCMInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
-        <receiver android:name=".utils.ReceiveAlarm"/>
-
-        <receiver android:name=".utils.ReceptorBoot"
+        <receiver android:name=".utils.ReceiveAlarm" />
+        <receiver
+            android:name=".utils.ReceptorBoot"
             android:enabled="false">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
-
-
 
         <activity
             android:name=".activities.LaunchScreenActivity"
@@ -63,8 +58,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SettingsActivity"
-            android:label="@string/menu_settings"
-            android:configChanges="orientation|screenSize"/>
+            android:configChanges="orientation|screenSize"
+            android:label="@string/menu_settings" />
         <activity
             android:name=".activities.ProductCatalogMapActivity"
             android:configChanges="orientation|screenSize"
@@ -75,32 +70,34 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-
-
         <activity
             android:name=".activities.MyAllergiesActivity"
-            android:label="@string/title_activity_my_allergies"
-            android:configChanges="orientation|screenSize"/>
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_my_allergies" />
         <activity
             android:name=".activities.LocationActivity"
-            android:label="@string/title_activity_location"
-            android:configChanges="orientation|screenSize"/>
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_location" />
         <activity
             android:name=".activities.HelpActivity"
-            android:label="@string/title_activity_help"
-            android:configChanges="orientation|screenSize"/>
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_help" />
         <activity
             android:name=".activities.AllergyActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation|screenSize"/>
-
-        <activity android:name=".activities.LoginActivity"
-            android:label="@string/menu_login"
-            android:configChanges="orientation|screenSize"/>
-
-        <activity android:name=".activities.SignupActivity"
-            android:label="@string/menu_signup"
-            android:configChanges="orientation|screenSize"/>
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/menu_login" />
+        <activity
+            android:name=".activities.SignupActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/menu_signup" />
+        <activity
+            android:name=".activities.LocationMapActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_location_map"/>
     </application>
 
 </manifest>

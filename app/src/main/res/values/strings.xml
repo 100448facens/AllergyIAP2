@@ -1,6 +1,6 @@
 <resources>
 
-    <string translatable="false" name="apps_link">http://url.app/store.php</string>
+    <string name="apps_link" translatable="false">http://url.app/store.php</string>
 
     <string name="app_name">AllergyIAP</string>
     <string name="menu_login">Login</string>
@@ -147,5 +147,6 @@
     <string name="share_dialog_title">Share</string>
 
     <string name="progress_dialog_message">Wait, updating data!</string>
+    <string name="title_activity_location_map">Map</string>
 
 </resources>

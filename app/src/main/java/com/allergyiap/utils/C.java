@@ -133,6 +133,7 @@ public final class C {
             public static final String VAR_ALLERGY = appPkg + ".allergy_id";
             public static final String VAR_ALLERGY2 = appPkg + ".allergy_object";
             public static final String VAR_PRODUCT = appPkg + ".product_object";
+            public static final String VAR_STATION = appPkg + ".product_station";
         }
     }
 
