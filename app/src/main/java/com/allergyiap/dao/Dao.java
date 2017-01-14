@@ -1,7 +1,5 @@
 package com.allergyiap.dao;
 
-import android.util.Log;
-
 import com.allergyiap.db.DB;
 import com.allergyiap.utils.C;
 import com.allergyiap.utils.Util;
@@ -28,7 +26,7 @@ public abstract class Dao<T> {
 
     public abstract List<T> getAll();
 
-    public void updateFromWS(int days) {
+    public boolean updateFromWS(int days) {
         if (!db.getLastUpdate(this.entityName, days)) {
             try {
                 String jsonStr = Util.getUrl(C.Network.WS_URL + this.entityName);
@@ -41,7 +39,9 @@ public abstract class Dao<T> {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            return true;
         }
+        return false;
     }
 
 }

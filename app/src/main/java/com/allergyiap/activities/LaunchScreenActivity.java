@@ -98,11 +98,10 @@ public class LaunchScreenActivity extends BaseActivity {
     }
 
     public void showResult() {
-        if (UserAllergyService.getAllergyesByUser(UserService.getCurrentUser().getIduser()).size() > 0) {
-            Intent intent = new Intent(LaunchScreenActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
+        // Ever load the first screen
+        Intent intent = new Intent(LaunchScreenActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private boolean checkPermissionLocation() {

@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserAllergyDao extends Dao<UserAllergy> {
-    private static final String TABLE_NAME = "user_allergies";
+    public static final String TABLE_NAME = "user_allergies";
 
-    private static String id_user = "id_user";
-    private static String id_allergy = "id_allergy";
+    public static String id_user = "id_user";
+    public static String id_allergy = "id_allergy";
 
     public UserAllergyDao() {
         super(TABLE_NAME);
