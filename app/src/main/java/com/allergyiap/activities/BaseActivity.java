@@ -10,13 +10,10 @@ import android.view.WindowManager;
 
 import com.allergyiap.R;
 import com.allergyiap.db.DB;
-import com.allergyiap.service.AllergyService;
-import com.allergyiap.services.AllergyLevelProxyClass;
 import com.allergyiap.utils.C;
 import com.allergyiap.utils.DBHelper;
 import com.allergyiap.utils.Prefs;
 
-import java.util.List;
 import java.util.Locale;
 
 /**

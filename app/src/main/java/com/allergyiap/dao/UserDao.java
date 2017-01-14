@@ -92,11 +92,10 @@ public class UserDao extends Dao<User>{
 	}
 	
 	private List<User> select(String query) {
-		this.updateFromWS(1);
+		//this.updateFromWS(1);
 		List<User> list = new ArrayList<>();
 
 		try {
-
 			ResultSet rs = db.execute(query);
 			while (rs.next()) {
 

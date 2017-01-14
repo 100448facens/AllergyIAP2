@@ -61,9 +61,6 @@ CREATE TABLE allergy (
     allergy_code text
 );
 
-INSERT INTO `station` VALUES (-1,'Default',0,0);
-INSERT INTO `user_information` VALUES (-1,'Guest','User','guest@allergyiap.com','',-1,'','0:00');
-
 CREATE TABLE IF NOT EXISTS data_version (iddata_version INTEGER PRIMARY KEY AUTOINCREMENT , name TEXT , last_update DATE);
 
 COMMIT;

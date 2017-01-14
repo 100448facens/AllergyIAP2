@@ -70,7 +70,7 @@ public class UserAllergyDao extends Dao<UserAllergy> {
 	}
 
 	private List<UserAllergy> select(String query) {
-		this.updateFromWS(1);
+		//this.updateFromWS(1);
 		List<UserAllergy> list = new ArrayList<>();
 		try {
 
@@ -107,7 +107,6 @@ public class UserAllergyDao extends Dao<UserAllergy> {
 
 	public List<Allergy> getAllergyesByUser(long iduser) {
 		String selectQuery = "SELECT id_allergy FROM " + TABLE_NAME + " WHERE "+ id_user + " = " + iduser + ";";
-		System.out.println("Query: "+selectQuery);
 		List<Allergy> list = new ArrayList<>();
 		try {
 			ResultSet rs = db.execute(selectQuery);
@@ -121,6 +120,20 @@ public class UserAllergyDao extends Dao<UserAllergy> {
 			return null;
 		}
 		return list;
+	}
+
+	public boolean getTheUserHasThisAllergy(long iduser,long idallergy) {
+		String selectQuery = "SELECT id_allergy FROM " + TABLE_NAME + " WHERE "+ id_user + " = " + iduser + " AND "+ id_allergy + " = " + idallergy;
+		try {
+			ResultSet rs = db.execute(selectQuery);
+			if (rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return false;
 	}
 
 }

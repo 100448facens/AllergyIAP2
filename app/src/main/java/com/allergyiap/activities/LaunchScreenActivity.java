@@ -1,7 +1,5 @@
 package com.allergyiap.activities;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,7 +12,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.widget.ImageView;
 
 import com.allergyiap.R;
 import com.allergyiap.service.AllergyLevelService;
@@ -28,9 +25,6 @@ import com.allergyiap.service.UserAllergyService;
 import com.allergyiap.service.UserService;
 import com.allergyiap.utils.CommonServices;
 import com.allergyiap.utils.LocationService;
-import com.allergyiap.utils.Prefs;
-
-import java.util.Calendar;
 
 /**
  * Created by David on 06/01/2017.
@@ -104,13 +98,11 @@ public class LaunchScreenActivity extends BaseActivity {
     }
 
     public void showResult() {
-
-        //if (Prefs.getInstance(this).getAllergies().size() > 0) {
-
+        if (UserAllergyService.getAllergyesByUser(UserService.getCurrentUser().getIduser()).size() > 0) {
             Intent intent = new Intent(LaunchScreenActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
-        //}
+        }
     }
 
     private boolean checkPermissionLocation() {
