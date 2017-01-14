@@ -3,6 +3,7 @@ package com.allergyiap.activities;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,7 +18,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.allergyiap.R;
+import com.allergyiap.beans.Station;
 import com.allergyiap.entities.ProductCatalogEntity;
+import com.allergyiap.service.StationService;
+import com.allergyiap.utils.LocationService;
 import com.allergyiap.utils.ReceiveAlarm;
 
 import java.util.Calendar;
@@ -31,6 +35,11 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout drawer;
 
     public enum menuItemPosition {SEARCH, LOCATION}
+    private Station s;
+
+    public Station getStation(){
+        return s;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +48,11 @@ public class MainActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle("Lleida");
+        Location l=LocationService.getInstance(this).location;
+
+        Station s= StationService.getNearestStation(l.getLatitude(),l.getLongitude());
+
+        getSupportActionBar().setTitle(s.getName_station());
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -106,17 +119,19 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-
         switch (id) {
             case R.id.nav_login:
                 drawer.closeDrawer(GravityCompat.START);
                 startActivity(new Intent(this, LoginActivity.class));
                 break;
+            case R.id.nav_profile:
+                drawer.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(this, SignupActivity.class));
+                break;
             case R.id.nav_level:
                 openFragment(LevelAllergyFragment.class);
                 //changeTabText(R.string.menu_level);
-                changeTabText("Lleida");
+                changeTabText(s.getName_station());
                 menuItemVisibility[menuItemPosition.SEARCH.ordinal()] = false;
                 menuItemVisibility[menuItemPosition.LOCATION.ordinal()] = true;
                 updateMenu();

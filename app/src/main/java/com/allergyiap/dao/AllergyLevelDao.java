@@ -101,6 +101,11 @@ public class AllergyLevelDao extends Dao<AllergyLevel> {
 		return select(selectQuery);
 	}
 
+	public List<AllergyLevel> getByStation(long stationid) {
+		String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE "+station+" = "+stationid;
+		return select(selectQuery);
+	}
+
 	public AllergyLevelDao() {
 		super(TABLE_NAME);
 	}

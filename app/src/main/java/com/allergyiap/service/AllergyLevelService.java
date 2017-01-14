@@ -28,5 +28,8 @@ private static AllergyLevelDao dao = new AllergyLevelDao();
 	public static List<AllergyLevel> getAll() {
 		return dao.getAll();
 	}
+	public static List<AllergyLevel> getByStation(long stationid) {
+		return dao.getByStation(stationid);
+	}
 
 }
