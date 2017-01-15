@@ -13,11 +13,21 @@ public class User implements java.io.Serializable {
 	private String alarm_weekdays;
 	private String alarm_time;
 
+	public String getDevice_key() {
+		return device_key;
+	}
+
+	public void setDevice_key(String device_key) {
+		this.device_key = device_key;
+	}
+
+	private String device_key;
+
 	public User() {
 	}
 
 	public User(long id, String userName, String userSecondName, String userMail, String userPassword,
-			int user_station_default, String alarm_weekdays, String alarm_time) {
+			int user_station_default, String alarm_weekdays, String alarm_time, String device_key) {
 		this.iduser = id;
 		this.user_name = userName;
 		this.user_second_name = userSecondName;
@@ -26,10 +36,11 @@ public class User implements java.io.Serializable {
 		this.user_station_default = user_station_default;
 		this.alarm_weekdays = alarm_weekdays;
 		this.alarm_time = alarm_time;
+		this.device_key = device_key;
 	}
 	
 	public User(String userName, String userSecondName, String userMail, String userPassword,
-			int user_station_default, String alarm_weekdays, String alarm_time) {
+			int user_station_default, String alarm_weekdays, String alarm_time, String device_key) {
 		this.user_name = userName;
 		this.user_second_name = userSecondName;
 		this.user_password = userPassword;
@@ -37,6 +48,7 @@ public class User implements java.io.Serializable {
 		this.user_station_default = user_station_default;
 		this.alarm_weekdays = alarm_weekdays;
 		this.alarm_time = alarm_time;
+		this.device_key = device_key;
 	}
 
 	public long getIduser() {

@@ -64,8 +64,6 @@ CREATE TABLE allergy (
     allergy_code text
 );
 
-INSERT INTO station VALUES (-1,'Default',0,0);
-
 CREATE TABLE IF NOT EXISTS data_version (iddata_version INTEGER PRIMARY KEY AUTOINCREMENT , name TEXT , last_update DATE);
 
 COMMIT;

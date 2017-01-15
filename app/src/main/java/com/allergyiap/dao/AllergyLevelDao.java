@@ -102,7 +102,7 @@ public class AllergyLevelDao extends Dao<AllergyLevel> {
 	}
 
 	public List<AllergyLevel> getByStation(long stationid) {
-		String selectQuery = "SELECT " + TABLE_NAME + ".* FROM " + TABLE_NAME + " INNER JOIN station ON station.name_station = allergy_level.station WHERE station.idstation = "+stationid;
+		String selectQuery = "SELECT allergy_level.* FROM allergy_level INNER JOIN station ON station.name_station = allergy_level.station INNER JOIN user_allergies ON user_allergies.id_allergy = allergy_level.allergy_idallergy INNER JOIN user_information ON user_information.iduser = user_allergies.id_user WHERE station.idstation = "+stationid+" AND DATE('NOW') BETWEEN allergy_level.date_start AND allergy_level.date_end GROUP BY allergy_level.allergy_idallergy";
 		return select(selectQuery);
 	}
 

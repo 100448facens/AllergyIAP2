@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.allergyiap.beans.User;
 import com.allergyiap.dao.UserDao;
+import com.allergyiap.utils.C;
+import com.allergyiap.utils.Util;
 
 public class UserService {
 
@@ -15,6 +17,15 @@ private static UserDao dao = new UserDao();
 	
 	public static void update(User bean){
 		dao.update(bean);
+		User u=bean;
+		if (u.getIduser() > 0) {
+			try {
+				Util.getUrlAsync(C.Network.WS_URL + "setnotification/" + u.getUser_name() + "/" + u.getUser_password() + "/W" + u.getAlarm_weekdays() + "/" + u.getAlarm_time() + "/" + u.getDevice_key());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 	
 	public static void delete(int id){

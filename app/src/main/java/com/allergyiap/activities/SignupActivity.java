@@ -10,11 +10,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.allergyiap.R;
+import com.allergyiap.beans.Allergy;
 import com.allergyiap.beans.User;
+import com.allergyiap.service.UserAllergyService;
 import com.allergyiap.service.UserService;
 import com.allergyiap.utils.C;
 import com.allergyiap.utils.D;
 import com.allergyiap.utils.Util;
+
+import java.util.List;
 
 public class SignupActivity extends BaseActivity {
 
@@ -89,6 +93,11 @@ public class SignupActivity extends BaseActivity {
                 u.setUser_password(password);
                 u.setUser_mail(name);
                 UserService.update(u);
+                List<Allergy> la = UserAllergyService.getAllergyesByUser(u.getIduser());
+                for (Allergy al : la) {
+                    UserAllergyService.setAllergyToTheCurrentUser(al.getIdallergy(),true);
+                }
+
             } else if (l == -1) {
                 onSignupFailed();
                 progressDialog.dismiss();

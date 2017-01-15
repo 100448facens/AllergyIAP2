@@ -4,6 +4,8 @@ import com.allergyiap.beans.Allergy;
 import com.allergyiap.beans.User;
 import com.allergyiap.beans.UserAllergy;
 import com.allergyiap.dao.UserAllergyDao;
+import com.allergyiap.utils.C;
+import com.allergyiap.utils.Util;
 
 import java.util.List;
 
@@ -34,11 +36,20 @@ public class UserAllergyService {
         return dao.getTheUserHasThisAllergy(UserService.getCurrentUser().getIduser(), idallergy);
     }
 
-    public static void setAllergyToTheCurrentUser(long idallergy,boolean checked){
-        if(checked){
-            dao.setAllergyToUser(UserService.getCurrentUser().getIduser(),idallergy);
-        }else {
-            dao.unsetAllergyToUser(UserService.getCurrentUser().getIduser(),idallergy);
+    public static void setAllergyToTheCurrentUser(long idallergy, boolean checked) {
+        if (checked) {
+            dao.setAllergyToUser(UserService.getCurrentUser().getIduser(), idallergy);
+        } else {
+            dao.unsetAllergyToUser(UserService.getCurrentUser().getIduser(), idallergy);
+        }
+        User u = UserService.getCurrentUser();
+        if (u.getIduser() > 0) {
+            try {
+                long c = (checked ? 1 : 0);
+                Util.getUrlAsync(C.Network.WS_URL + "setallergy/" + u.getUser_name() + "/" + u.getUser_password() + "/" + idallergy + "/" + c);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

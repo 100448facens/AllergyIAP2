@@ -2,6 +2,7 @@ package com.allergyiap.utils;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.allergyiap.beans.Station;
 import com.allergyiap.db.DB;
@@ -25,6 +26,8 @@ import java.util.Map;
  */
 
 public class Util {
+    public static Station station;
+
     public static String getUrl(String urlStr) throws Exception {
         java.net.URL url = new URL(urlStr);
         DownloadTask d = new DownloadTask();
@@ -58,8 +61,6 @@ public class Util {
         reader.close();
         return sb.toString();
     }
-
-    public static Station station;
 
     static public JSONArray mapToJsonArray(List<HashMap<String, String>> list) {
         JSONArray json_arr = new JSONArray();
@@ -97,7 +98,7 @@ public class Util {
     }
 
     /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-	/*::	This function converts radians to decimal degrees						 :*/
+    /*::	This function converts radians to decimal degrees						 :*/
 	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
     public static double rad2deg(double rad) {
         return (rad * 180 / Math.PI);
@@ -105,6 +106,7 @@ public class Util {
 
     public static class DownloadTask extends AsyncTask<URL, Void, String> {
         public String getUrl(URL url) {
+            //Log.d("WSGET", url.toString());
             HttpURLConnection urlConnection = null;
             try {
                 urlConnection = (HttpURLConnection) url.openConnection();
