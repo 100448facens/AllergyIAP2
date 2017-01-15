@@ -34,9 +34,21 @@
     <string name="group_about">About this App</string>
     <string name="group_allergy_about">Description</string>
 
-    <string name="text_legend"><![CDATA[<b>Legend</b>]]></string>
-    <string name="text_information"><![CDATA[<b><i>Legal Information</i></b>]]></string>
-    <string name="text_about"><![CDATA[About this App]]></string>
+    <string name="text_legend_1">Null</string>
+    <string name="text_legend_2">Low</string>
+    <string name="text_legend_3">Medium</string>
+    <string name="text_legend_4">High</string>
+    <string name="text_legend_5">Max</string>
+    <string name="text_legend_6">Increase</string>
+    <string name="text_legend_7">Stable</string>
+    <string name="text_legend_8">Decrease</string>
+    <string name="text_legend_9">Attention</string>
+    <string name="text_legend">Legend</string>
+    <string name="text_information"><![CDATA[All data related with allergies is extracted from Aerobiology information of CATALONIA (Xarxa Aerobiològica de Catalunya, XAC). The data are published and disseminated for the purpose of reporting the current state and future prediction of allergenic pollen levels.
+Forbidden the reproduction total or partial of this data without authorization. More information: http://lap.uab.cat/aerobiologia/es/
+]]></string>
+    <string name="text_about"><![CDATA[This application has been developed as a project of the University of Lleida by 5 students of Master in Computer Engineering: Luiz Fernando Jacção, Meritxell Jordana Gavieiro, Muhammad Mirza Fahmi, Jose David Nunes de Oliveira and Carolina Romeu Farré
+]]></string>
 
     <string name="menu_search">Search</string>
     <string name="menu_share">Share</string>
