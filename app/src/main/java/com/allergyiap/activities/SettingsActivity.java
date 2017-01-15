@@ -2,11 +2,8 @@ package com.allergyiap.activities;
 
 
 import android.annotation.TargetApi;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -14,23 +11,30 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
+import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.SwitchPreference;
-import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.preference.SwitchPreference;
+import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 
 import com.allergyiap.R;
+import com.allergyiap.beans.User;
+import com.allergyiap.service.UserService;
 import com.allergyiap.utils.A;
-import com.allergyiap.utils.ReceptorBoot;
+import com.allergyiap.utils.Prefs;
 import com.allergyiap.utils.TimePreference;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -87,25 +91,43 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                     }
                 }
 
-            } else if(preference instanceof TimePreference) {
-                ReceptorBoot.cancelAlarm(preference.getContext());
-                ReceptorBoot.initAlarm(preference.getContext());
+            } else if (preference instanceof TimePreference) {
+                TimePreference castPreference = (TimePreference) preference;
+
+                long millis = castPreference.getMilli();
+                Date d = new Date(millis);
+                SimpleDateFormat sdfDate = new SimpleDateFormat("HH:mm");
+                String hms = sdfDate.format(d) + ":00";
+                User u = UserService.getCurrentUser();
+                u.setAlarm_time(hms);
+                UserService.update(u);
+            } else if (preference instanceof MultiSelectListPreference) {
+                MultiSelectListPreference castPreference = (MultiSelectListPreference) preference;
+                Set<String> sts = castPreference.getValues();
+                String weekdays = "";
+                for (String s :
+                        sts) {
+                    weekdays += s;
+                }
+                User u = UserService.getCurrentUser();
+                u.setAlarm_weekdays(weekdays);
+                UserService.update(u);
             } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
-                preference.setSummary(stringValue);
-
+                //preference.setSummary(stringValue);
                 if (stringValue.equals("prefs.notification.enabled")) {
-
                     boolean switched = ((SwitchPreference) preference).isChecked();
-
                     if (switched) {
-                        ReceptorBoot.initAlarm(preference.getContext());
+                        User u = UserService.getCurrentUser();
+                        u.setAlarm_weekdays("1234567");
+                        UserService.update(u);
                     } else {
-                        ReceptorBoot.cancelAlarm(preference.getContext());
+                        User u = UserService.getCurrentUser();
+                        u.setAlarm_weekdays("");
+                        UserService.update(u);
                     }
                 }
-
             }
             return true;
         }
@@ -139,10 +161,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         SharedPreferences shared = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
         String name = preference.getKey();
         Object aux;
-        if(preference instanceof SwitchPreference) {
+        if (preference instanceof SwitchPreference) {
             aux = shared.getBoolean(name, Boolean.FALSE);
-        } else if(preference instanceof TimePreference) {
+        } else if (preference instanceof TimePreference) {
             aux = shared.getLong(name, 0);
+        } else if (preference instanceof MultiSelectListPreference) {
+            aux = shared.getStringSet(name, new HashSet<String>());
         } else {
             aux = shared.getString(name, "");
         }
@@ -184,11 +208,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     /**
      * {@inheritDoc}
 
-    @Override
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public void onBuildHeaders(List<Header> target) {
-        loadHeadersFromResource(R.xml.pref_general, target);
-    }*/
+     @Override
+     @TargetApi(Build.VERSION_CODES.HONEYCOMB) public void onBuildHeaders(List<Header> target) {
+     loadHeadersFromResource(R.xml.pref_general, target);
+     }*/
 
     /**
      * This method stops fragment injection in malicious applications.
@@ -196,6 +219,13 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      */
     protected boolean isValidFragment(String fragmentName) {
         return PreferenceFragment.class.getName().equals(fragmentName);
+    }
+
+    /**
+     * Share app click event
+     */
+    private void shareAppListener() {
+
     }
 
     /**
@@ -214,13 +244,17 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            //bindPreferenceSummaryToValue(findPreference("prefs.notification.enabled"));
+
+            bindPreferenceSummaryToValue(findPreference("prefs.notification.enabled"));
+            bindPreferenceSummaryToValue(findPreference("prefs.notification.days_week"));
+
             bindPreferenceSummaryToValue(findPreference("prefs.notification.sound"));
             //bindPreferenceSummaryToValue(findPreference("days_week"));
             bindPreferenceSummaryToValue(findPreference("time_alarm"));
 
             findPreference("prefs.app.share").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override public boolean onPreferenceClick(Preference preference) {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
                     String subject = String.format(getContext().getString(R.string.mail_share_app_subject), getContext().getString(R.string.app_name));
                     String message = String.format(getContext().getString(R.string.mail_share_app_body), getContext().getString(R.string.app_name), getContext().getString(R.string.apps_link));
                     A.startShareText(getContext(), subject, message);
@@ -239,12 +273,5 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             }
             return super.onOptionsItemSelected(item);
         }
-    }
-
-    /**
-     * Share app click event
-     */
-    private void shareAppListener() {
-
     }
 }

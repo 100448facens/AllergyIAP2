@@ -106,7 +106,7 @@ public class Util {
 
     public static class DownloadTask extends AsyncTask<URL, Void, String> {
         public String getUrl(URL url) {
-            //Log.d("WSGET", url.toString());
+            Log.d("WSGET", url.toString());
             HttpURLConnection urlConnection = null;
             try {
                 urlConnection = (HttpURLConnection) url.openConnection();

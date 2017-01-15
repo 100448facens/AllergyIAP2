@@ -36,6 +36,7 @@ public class ReceptorBoot extends BroadcastReceiver {
                 TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
                 TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
 
+
         cal.set(Calendar.HOUR_OF_DAY, TimePreference.getHour(hms));
         cal.set(Calendar.MINUTE, TimePreference.getMinute(hms));
         cal.set(Calendar.SECOND, 0);

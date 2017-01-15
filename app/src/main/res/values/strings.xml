@@ -92,7 +92,7 @@
         <item>Saturday</item>
     </string-array>
     <string-array name="pref_sync_daysweek_values">
-        <item>0</item>
+        <item>7</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>

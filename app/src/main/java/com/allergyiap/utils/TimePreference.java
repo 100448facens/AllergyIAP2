@@ -107,4 +107,11 @@ public class TimePreference extends DialogPreference {
         }
         return DateFormat.getTimeFormat(getContext()).format(new Date(calendar.getTimeInMillis()));
     }
+    public long getMilli() {
+        if (calendar == null) {
+            return 0;
+        }
+        return calendar.getTimeInMillis();
+    }
+
 }
