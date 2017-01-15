@@ -22,7 +22,7 @@ public class HelpActivity extends BaseActivity {
         setContentView(R.layout.activity_help);
 
         txtAbout = (TextView) findViewById(R.id.text_about);
-        txtLegend = (TextView) findViewById(R.id.text_legend);
+        //txtLegend = (TextView) findViewById(R.id.text_legend);
         txtInformation = (TextView) findViewById(R.id.text_information);
     }
 
@@ -32,7 +32,7 @@ public class HelpActivity extends BaseActivity {
         super.onStart();
 
         txtAbout.setText(Html.fromHtml(getResources().getString(R.string.text_about)));
-        txtLegend.setText(Html.fromHtml(getResources().getString(R.string.text_legend)));
+        //txtLegend.setText(Html.fromHtml(getResources().getString(R.string.text_legend)));
         txtInformation.setText(Html.fromHtml(getResources().getString(R.string.text_information)));
     }
 }
