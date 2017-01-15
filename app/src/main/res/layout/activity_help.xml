@@ -65,11 +65,291 @@
 
                     </RelativeLayout>
 
-                    <TextView
+                    <!--TextView
                         android:id="@+id/text_legend"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content" /-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp">
 
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:scaleType="fitXY"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:src="@drawable/legend_level_allergy_null"
+                            />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginRight="10dp"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:paddingBottom="8dp">
+
+                            <TextView
+                                android:id="@+id/name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/text_legend_1"
+                                android:textColor="@color/primary_text_default_material_light"
+                                android:textSize="@dimen/abc_text_size_medium_material" />
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:scaleType="fitXY"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:src="@drawable/legend_level_allergy_low"
+                            />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginRight="10dp"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:paddingBottom="8dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/text_legend_2"
+                                android:textColor="@color/primary_text_default_material_light"
+                                android:textSize="@dimen/abc_text_size_medium_material" />
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:scaleType="fitXY"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:src="@drawable/legend_level_allergy_medium"
+                            />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginRight="10dp"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:paddingBottom="8dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/text_legend_3"
+                                android:textColor="@color/primary_text_default_material_light"
+                                android:textSize="@dimen/abc_text_size_medium_material" />
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:scaleType="fitXY"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:src="@drawable/legend_level_allergy_high"
+                            />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginRight="10dp"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:paddingBottom="8dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/text_legend_4"
+                                android:textColor="@color/primary_text_default_material_light"
+                                android:textSize="@dimen/abc_text_size_medium_material" />
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:scaleType="fitXY"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:src="@drawable/legend_level_allergy_veryhigh"
+                            />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginRight="10dp"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:paddingBottom="8dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/text_legend_5"
+                                android:textColor="@color/primary_text_default_material_light"
+                                android:textSize="@dimen/abc_text_size_medium_material" />
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:scaleType="fitXY"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:src="@drawable/ic_increase"
+                            />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginRight="10dp"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:paddingBottom="8dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/text_legend_6"
+                                android:textColor="@color/primary_text_default_material_light"
+                                android:textSize="@dimen/abc_text_size_medium_material" />
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:scaleType="fitXY"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:src="@drawable/ic_decrease"
+                            />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginRight="10dp"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:paddingBottom="8dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/text_legend_8"
+                                android:textColor="@color/primary_text_default_material_light"
+                                android:textSize="@dimen/abc_text_size_medium_material" />
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:contentDescription="@null"
+                            android:scaleType="fitXY"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:src="@drawable/ic_warning"
+                            />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginRight="10dp"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:paddingBottom="8dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="5dp"
+                                android:text="@string/text_legend_9"
+                                android:textColor="@color/primary_text_default_material_light"
+                                android:textSize="@dimen/abc_text_size_medium_material" />
+
+                        </RelativeLayout>
+                    </LinearLayout>
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
