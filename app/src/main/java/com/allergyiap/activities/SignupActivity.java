@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.allergyiap.R;
+import com.allergyiap.beans.User;
+import com.allergyiap.service.UserService;
 import com.allergyiap.utils.C;
 import com.allergyiap.utils.D;
 import com.allergyiap.utils.Util;
@@ -80,6 +82,12 @@ public class SignupActivity extends BaseActivity {
             if (l > 0) {
                 onSignupSuccess();
                 progressDialog.dismiss();
+                UserService.setUserId(l);
+                User u=UserService.getCurrentUser();
+                u.setUser_name(name);
+                u.setUser_password(password);
+                u.setUser_mail(name);
+                UserService.update(u);
             } else if (l == -1) {
                 onSignupFailed();
                 progressDialog.dismiss();

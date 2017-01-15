@@ -37,4 +37,8 @@ private static UserDao dao = new UserDao();
 		return getAll().get(0);
 	}
 
+	public static void setUserId(long id){
+		dao.setUserId(id);
+	}
+
 }

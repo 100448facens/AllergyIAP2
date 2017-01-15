@@ -16,13 +16,17 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.allergyiap.R;
 import com.allergyiap.beans.Station;
 import com.allergyiap.entities.ProductCatalogEntity;
 import com.allergyiap.service.StationService;
+import com.allergyiap.service.UserService;
 import com.allergyiap.utils.LocationService;
 import com.allergyiap.utils.ReceiveAlarm;
+import com.allergyiap.utils.Util;
 
 import java.util.Calendar;
 
@@ -35,11 +39,6 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout drawer;
 
     public enum menuItemPosition {SEARCH, LOCATION}
-    private Station s;
-
-    public Station getStation(){
-        return s;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +47,7 @@ public class MainActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Location l=LocationService.getInstance(this).location;
-
-        Station s= StationService.getNearestStation(l.getLatitude(),l.getLongitude());
-
-        getSupportActionBar().setTitle(s.getName_station());
+        getSupportActionBar().setTitle(Util.station.getName_station());
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -71,6 +66,25 @@ public class MainActivity extends AppCompatActivity
         navigationView.setCheckedItem(R.id.nav_level);
         navigationView.getMenu().performIdentifierAction(R.id.nav_level, 0);
 
+        Menu menu=navigationView.getMenu();
+        if(UserService.getCurrentUser().getIduser()==-1){
+            menu.findItem(R.id.nav_profile).setVisible(false);
+            menu.findItem(R.id.nav_login).setVisible(true);
+        }else{
+            menu.findItem(R.id.nav_profile).setVisible(false);
+            menu.findItem(R.id.nav_login).setVisible(false);
+            /*
+            TextView t=(TextView)navigationView.findViewById(R.id.text_user);
+            t.setText(UserService.getCurrentUser().getUser_name());
+            t.setVisibility(View.VISIBLE);
+            */
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -131,7 +145,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_level:
                 openFragment(LevelAllergyFragment.class);
                 //changeTabText(R.string.menu_level);
-                changeTabText(s.getName_station());
+                changeTabText(Util.station.getName_station());
                 menuItemVisibility[menuItemPosition.SEARCH.ordinal()] = false;
                 menuItemVisibility[menuItemPosition.LOCATION.ordinal()] = true;
                 updateMenu();

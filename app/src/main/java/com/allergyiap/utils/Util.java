@@ -3,6 +3,7 @@ package com.allergyiap.utils;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.allergyiap.beans.Station;
 import com.allergyiap.db.DB;
 
 import org.json.JSONArray;
@@ -57,6 +58,8 @@ public class Util {
         reader.close();
         return sb.toString();
     }
+
+    public static Station station;
 
     static public JSONArray mapToJsonArray(List<HashMap<String, String>> list) {
         JSONArray json_arr = new JSONArray();

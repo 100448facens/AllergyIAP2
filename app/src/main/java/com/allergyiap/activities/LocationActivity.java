@@ -2,23 +2,19 @@ package com.allergyiap.activities;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckedTextView;
 
 import com.allergyiap.R;
-import com.allergyiap.adapters.AllergyAdapter;
 import com.allergyiap.adapters.StationAdapter;
-import com.allergyiap.beans.Allergy;
 import com.allergyiap.beans.Station;
-import com.allergyiap.service.AllergyService;
 import com.allergyiap.service.StationService;
 import com.allergyiap.utils.C;
+import com.allergyiap.utils.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +22,9 @@ import java.util.List;
 public class LocationActivity extends BaseActivity {
 
     private static final String TAG = "LocationActivity";
-
+    List<Station> stations = new ArrayList<>();
     private StationAdapter adapter;
     private RecyclerView recyclerView;
-    List<Station> stations = new ArrayList<>();
     private AsyncTask<Void, Void, List<Station>> task;
 
 
@@ -54,7 +49,7 @@ public class LocationActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        if(task != null) {
+        if (task != null) {
             task.cancel(true);
             task = null;
         }
@@ -78,6 +73,7 @@ public class LocationActivity extends BaseActivity {
             @Override
             public void onItemClick(View view, int position, Station alertEntity) {
                 //((CheckedTextView)view).toggle();
+                Util.station = alertEntity;
                 showMap(alertEntity);
             }
         });

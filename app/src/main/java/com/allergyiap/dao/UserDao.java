@@ -129,4 +129,8 @@ public class UserDao extends Dao<User>{
 		return users.isEmpty() ? null : users.get(0);
 	}
 
+	public void setUserId(long id) {
+		String selectQuery = "UPDATE " + TABLE_NAME + " SET " + iduser + " = " + id + " WHERE " + iduser + " = -1";
+		db.executeUpdate(selectQuery);
+	}
 }

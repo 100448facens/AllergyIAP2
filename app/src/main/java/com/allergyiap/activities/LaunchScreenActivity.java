@@ -3,6 +3,7 @@ package com.allergyiap.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
@@ -14,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.allergyiap.R;
+import com.allergyiap.beans.Station;
 import com.allergyiap.service.AllergyLevelService;
 import com.allergyiap.service.AllergyService;
 import com.allergyiap.service.CustomerService;
@@ -25,6 +27,7 @@ import com.allergyiap.service.UserAllergyService;
 import com.allergyiap.service.UserService;
 import com.allergyiap.utils.CommonServices;
 import com.allergyiap.utils.LocationService;
+import com.allergyiap.utils.Util;
 
 /**
  * Created by David on 06/01/2017.
@@ -171,6 +174,9 @@ public class LaunchScreenActivity extends BaseActivity {
         @Override
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
+            Location l=LocationService.getInstance(context).location;
+            Util.station = StationService.getNearestStation(l.getLatitude(),l.getLongitude());
+
 //          Pass your loaded data here using Intent
 
             showResult();
