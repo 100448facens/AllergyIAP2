@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AllergyIAP</string>
+    <string name="about_login">El login es para generar datos estádisticos de las alergias</string>
     <string name="map_name">Allergy Map</string>
     <string name="menu_login">Login</string>
     <string name="menu_level">Niveles</string>

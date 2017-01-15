@@ -3,6 +3,7 @@
     <string name="apps_link" translatable="false">http://url.app/store.php</string>
 
     <string name="app_name">AllergyIAP</string>
+    <string name="about_login">The login is to generate statistics about the allergies</string>
     <string name="menu_login">Login</string>
     <string name="menu_signup">SignUp</string>
     <string name="menu_profile">Profile</string>
