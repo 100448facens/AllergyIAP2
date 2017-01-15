@@ -15,7 +15,6 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.allergyiap.R;
-import com.allergyiap.beans.Station;
 import com.allergyiap.service.AllergyLevelService;
 import com.allergyiap.service.AllergyService;
 import com.allergyiap.service.CustomerService;
@@ -174,8 +173,10 @@ public class LaunchScreenActivity extends BaseActivity {
         @Override
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
-            Location l=LocationService.getInstance(context).location;
-            Util.station = StationService.getNearestStation(l.getLatitude(),l.getLongitude());
+            Location l = LocationService.getInstance(context).location;
+            if (l != null) {
+                Util.setStation(StationService.getNearestStation(l.getLatitude(), l.getLongitude()));
+            }
 
 //          Pass your loaded data here using Intent
 

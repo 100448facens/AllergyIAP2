@@ -141,7 +141,7 @@ public class LevelAllergyFragment extends Fragment {
 
         @Override
         protected List<AllergyLevel> doInBackground(Void... params) {
-            return AllergyLevelService.getByStation(Util.station.getIdstation());
+            return AllergyLevelService.getByStation(Util.getStation().getIdstation());
         }
 
         @Override

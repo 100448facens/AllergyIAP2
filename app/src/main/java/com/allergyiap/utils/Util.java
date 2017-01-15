@@ -5,7 +5,10 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.allergyiap.beans.Station;
+import com.allergyiap.beans.User;
 import com.allergyiap.db.DB;
+import com.allergyiap.service.StationService;
+import com.allergyiap.service.UserService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +29,7 @@ import java.util.Map;
  */
 
 public class Util {
-    public static Station station;
+    private static Station station;
 
     public static String getUrl(String urlStr) throws Exception {
         java.net.URL url = new URL(urlStr);
@@ -99,9 +102,25 @@ public class Util {
 
     /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
     /*::	This function converts radians to decimal degrees						 :*/
-	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+    /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
     public static double rad2deg(double rad) {
         return (rad * 180 / Math.PI);
+    }
+
+    public static Station getStation() {
+        if (Util.station == null) {
+            Station s = StationService.get(1);
+            Util.setStation(s);
+        }
+        return Util.station;
+    }
+
+    public static Station setStation(Station s) {
+        Util.station = s;
+        User u = UserService.getCurrentUser();
+        u.setUser_station_default((int) s.getIdstation());
+        UserService.update(u);
+        return Util.station;
     }
 
     public static class DownloadTask extends AsyncTask<URL, Void, String> {

@@ -20,7 +20,7 @@ private static UserDao dao = new UserDao();
 		User u=bean;
 		if (u.getIduser() > 0) {
 			try {
-				Util.getUrlAsync(C.Network.WS_URL + "setnotification/" + u.getUser_name() + "/" + u.getUser_password() + "/W" + u.getAlarm_weekdays() + "/" + u.getAlarm_time() + "/" + u.getDevice_key());
+				Util.getUrlAsync(C.Network.WS_URL + "setnotification/" + u.getUser_name() + "/" + u.getUser_password() + "/W" + u.getAlarm_weekdays() + "/" + u.getAlarm_time() + "/" + u.getDevice_key() + "/" + u.getUser_station_default());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

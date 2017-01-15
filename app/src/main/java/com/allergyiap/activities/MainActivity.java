@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle(Util.station.getName_station());
+        getSupportActionBar().setTitle(Util.getStation().getName_station());
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity
             if(resultCode == CommonServices.RESULT_RESTART) {
                 ((NavigationView) findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_level);
                 ((NavigationView) findViewById(R.id.nav_view)).getMenu().performIdentifierAction(R.id.nav_level, 0);
-                changeTabText(Util.station.getName_station());
+                changeTabText(Util.getStation().getName_station());
             }
         }
     }
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_level:
                 openFragment(LevelAllergyFragment.class);
                 //changeTabText(R.string.menu_level);
-                changeTabText(Util.station.getName_station());
+                changeTabText(Util.getStation().getName_station());
                 menuItemVisibility[menuItemPosition.SEARCH.ordinal()] = false;
                 menuItemVisibility[menuItemPosition.LOCATION.ordinal()] = true;
                 updateMenu();

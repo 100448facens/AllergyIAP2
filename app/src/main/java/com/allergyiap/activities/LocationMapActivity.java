@@ -2,10 +2,8 @@ package com.allergyiap.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.allergyiap.R;
 import com.allergyiap.beans.Station;
@@ -32,7 +30,7 @@ public class LocationMapActivity extends BaseActivity implements OnMapReadyCallb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_map);
 
-        station = (Station)getIntent().getSerializableExtra(C.IntentExtra.Sender.VAR_STATION);
+        station = (Station) getIntent().getSerializableExtra(C.IntentExtra.Sender.VAR_STATION);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -44,7 +42,7 @@ public class LocationMapActivity extends BaseActivity implements OnMapReadyCallb
         findViewById(R.id.btn_active).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Util.station = station;
+                Util.setStation(station);
                 setResult(CommonServices.RESULT_RESTART, new Intent());
                 finish();
             }
@@ -89,7 +87,7 @@ public class LocationMapActivity extends BaseActivity implements OnMapReadyCallb
         //marker.showInfoWindow();
     }
 
-    private void drawCircle(LatLng point){
+    private void drawCircle(LatLng point) {
 
         // Instantiating CircleOptions to draw a circle around the marker
         CircleOptions circleOptions = new CircleOptions();

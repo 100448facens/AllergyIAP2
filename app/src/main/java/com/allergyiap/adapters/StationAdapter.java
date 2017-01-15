@@ -43,7 +43,7 @@ public class StationAdapter extends RecyclerView.Adapter<StationAdapter.StationV
 
         viewHolder.station = station;
         viewHolder.name.setText(station.getName_station());
-        if(Util.station != null && station.getIdstation() == Util.station.getIdstation())
+        if(station.getIdstation() == Util.getStation().getIdstation())
             viewHolder.chk_check.setVisibility(View.VISIBLE);
         else
             viewHolder.chk_check.setVisibility(View.GONE);
