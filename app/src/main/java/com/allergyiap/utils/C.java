@@ -27,13 +27,21 @@ public final class C {
         // Language (SYNC with preferences.xml)
         public static final String LANGUAGE = "prefs.language";
 
-        public static final String USER_FIRST_TIME = "user.first.time";
-        public static final String USER_ALARM_ENABLED = "user.alarm.enabled";
-        public static final String USER_SOUND_ENABLED = "user.sound.enabled";
-        public static final String USER_ALARM_INCREASE = "user.alarm.increase";
-        public static final String USER_HOUR_ALARM = "user.hour.alarm";
-        public static final String USER_ALLERGIES = "user.allergies";
-        public static final String USER_DAYS_WEEK = "user.days.week";
+        public static final String USER_ALLERGIES = "prefs.user.allergies";
+
+        public static final String NOTIFICATIONS                  = "prefs.notification.list";
+        public static final String NOTIFICATIONS_ENABLED          = "prefs.notification.enabled";
+        public static final String NOTIFICATIONS_SOUND            = "prefs.notification.sound";
+        public static final String NOTIFICATIONS_VIBRATION        = "prefs.notification.vibration";
+        public static final String NOTIFICATIONS_WEEK             = "prefs.notification.days_week";
+        public static final String NOTIFICATIONS_HOUR             = "time_alarm";
+
+        // Login Fields
+        public static final String LOGIN_NAME  = "prefs.login.name";
+        public static final String LOGIN_PASS  = "prefs.login.pass";
+        public static final String LOGIN_TOKEN = "prefs.login.token";
+
+
     }
 
     /**
@@ -51,7 +59,8 @@ public final class C {
      */
     public static final class Network {
         // HOST
-        public static final String HOST = "http://alumnes-grp02.udl.cat";
+        //public static final String HOST = "http://alumnes-grp02.udl.cat";
+        public static final String HOST = "http://10.0.2.2:8080";
         // WebService URL
         public static final String WS_URL = HOST + "/AllergyIAPWS/rest/allergyws/";
 
@@ -125,6 +134,7 @@ public final class C {
             public static final String VAR_ALLERGY = appPkg + ".allergy_id";
             public static final String VAR_ALLERGY2 = appPkg + ".allergy_object";
             public static final String VAR_PRODUCT = appPkg + ".product_object";
+            public static final String VAR_STATION = appPkg + ".product_station";
         }
     }
 

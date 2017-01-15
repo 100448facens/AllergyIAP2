@@ -79,11 +79,13 @@ public class AllergyDao extends Dao<Allergy> {
     }
 
     private List<Allergy> select(String query) {
-        this.updateFromWS(1);
+        boolean uptated = this.updateFromWS(1);
         List<Allergy> list = new ArrayList<>();
 
         try {
-
+            if (uptated) {
+                db.executeUpdate("DELETE FROM " + UserAllergyDao.TABLE_NAME + " WHERE " + UserAllergyDao.id_user + " = -1");
+            }
             ResultSet rs = db.execute(query);
             while (rs.next()) {
 
@@ -93,6 +95,11 @@ public class AllergyDao extends Dao<Allergy> {
                 String code = rs.getString(allergy_code);
 
                 list.add(new Allergy(id, name, description, code));
+            }
+            if (uptated) {
+                for (Allergy a : list) {
+                    db.executeUpdate("INSERT INTO " + UserAllergyDao.TABLE_NAME + "(" + UserAllergyDao.id_user + "," + UserAllergyDao.id_allergy + ") VALUES(-1," + a.getIdallergy() + ")");
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

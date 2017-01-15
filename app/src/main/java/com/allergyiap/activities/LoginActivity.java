@@ -11,7 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.allergyiap.R;
+import com.allergyiap.service.UserService;
 import com.allergyiap.utils.CommonServices;
+import com.allergyiap.utils.D;
 
 public class LoginActivity extends BaseActivity {
 
@@ -51,6 +53,7 @@ public class LoginActivity extends BaseActivity {
                 startActivityForResult(intent, CommonServices.REQUEST_SIGNUP);
             }
         });
+        D.showSimpleDialog(this, getString(R.string.app_name), getString(R.string.about_login));
     }
 
     public void login() {
@@ -96,6 +99,7 @@ public class LoginActivity extends BaseActivity {
                 // TODO: Implement successful signup logic here
                 // By default we just finish the Activity and log them in automatically
                 this.finish();
+                startActivity(new Intent(this, LaunchScreenActivity.class));
             }
         }
     }
@@ -109,6 +113,7 @@ public class LoginActivity extends BaseActivity {
     public void onLoginSuccess() {
         loginButton.setEnabled(true);
         finish();
+        startActivity(new Intent(this, LaunchScreenActivity.class));
     }
 
     public void onLoginFailed() {

@@ -5,11 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckedTextView;
+
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.allergyiap.R;
 import com.allergyiap.beans.Allergy;
 import com.allergyiap.beans.Station;
+import com.allergyiap.utils.Util;
 
 import java.util.List;
 
@@ -40,6 +43,10 @@ public class StationAdapter extends RecyclerView.Adapter<StationAdapter.StationV
 
         viewHolder.station = station;
         viewHolder.name.setText(station.getName_station());
+        if(Util.station != null && station.getIdstation() == Util.station.getIdstation())
+            viewHolder.chk_check.setVisibility(View.VISIBLE);
+        else
+            viewHolder.chk_check.setVisibility(View.GONE);
     }
 
     @Override
@@ -50,12 +57,14 @@ public class StationAdapter extends RecyclerView.Adapter<StationAdapter.StationV
 
     public class StationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        CheckedTextView name;
+        TextView name;
         Station station;
+        ImageView chk_check;
 
         public StationViewHolder(View view) {
             super(view);
-            name = (CheckedTextView) view.findViewById(R.id.chk_name);
+            name = (TextView) view.findViewById(R.id.chk_name);
+            chk_check = (ImageView) view.findViewById(R.id.chk_check);
             //itemView.setOnClickListener(this);
             name.setOnClickListener(this);
         }

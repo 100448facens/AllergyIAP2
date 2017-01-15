@@ -9,7 +9,9 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Application Preferences Manager.
@@ -114,56 +116,91 @@ public class Prefs {
         }
     }
 
-    public void setUserFirstTime(Boolean param) {
-        sharedPrefs().edit().putBoolean(C.Prefs.USER_FIRST_TIME, param).apply();
+    public void setAllergies(Set<String> allergies) {
+        Log.v(TAG, ".setAllergies:" + allergies.size());
+        try {
+            // save
+            defaultSharedPrefs().edit().putStringSet(C.Prefs.USER_ALLERGIES, allergies).apply();
+        } catch (Exception e) {
+            Log.e(TAG, ".setAllergies Error: " + e.getMessage());
+        }
     }
 
-    public void setAlarmEnabled(Boolean enabled) {
-        sharedPrefs().edit().putBoolean(C.Prefs.USER_ALARM_ENABLED, enabled).apply();
-    }
-    public Boolean getAlarmEnabled() {
-        return sharedPrefs().getBoolean(C.Prefs.USER_ALARM_ENABLED, false);
-    }
-
-    public void setAlarmIncrease(Boolean enabled) {
-        sharedPrefs().edit().putBoolean(C.Prefs.USER_ALARM_INCREASE, enabled).apply();
-    }
-    public Boolean getAlarmIncrease() {
-        return sharedPrefs().getBoolean(C.Prefs.USER_ALARM_INCREASE, false);
+    /**
+     * Language (DefaultSharedPrefs from PreferenceActivity)
+     */
+    public Set<String> getAllergies() {
+        Set<String> allergies = defaultSharedPrefs().getStringSet(C.Prefs.LANGUAGE, new HashSet<String>());
+        Log.d(TAG, ".getLanguage" + allergies.size());
+        return allergies;
     }
 
-    public void setSoundEnabled(Boolean enabled) {
-        sharedPrefs().edit().putBoolean(C.Prefs.USER_SOUND_ENABLED, enabled).apply();
+
+
+    /**
+     * Notifications Received
+     *
+     * Some options in DefaultSharedPrefs from PreferenceActivity
+     */
+    public boolean isNotificationsEnabled() {
+        SharedPreferences defaultPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return defaultPrefs.getBoolean(C.Prefs.NOTIFICATIONS_ENABLED, false);
     }
-    public Boolean getSoundEnabled() {
-        return sharedPrefs().getBoolean(C.Prefs.USER_SOUND_ENABLED, false);
+    public boolean isNotificationsSound() {
+        SharedPreferences defaultPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return defaultPrefs.getBoolean(C.Prefs.NOTIFICATIONS_SOUND, false);
+    }
+    public boolean isNotificationsVibration() {
+        SharedPreferences defaultPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return defaultPrefs.getBoolean(C.Prefs.NOTIFICATIONS_VIBRATION, false);
+    }
+    public Set<String> getNotificationDaysOfWeek() {
+        Set<String> weeks = new HashSet<>();
+        SharedPreferences defaultPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return defaultPrefs.getStringSet(C.Prefs.NOTIFICATIONS_WEEK, weeks);
+    }
+    public Long getNotificationHour() {
+        SharedPreferences defaultPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return defaultPrefs.getLong(C.Prefs.NOTIFICATIONS_HOUR, 0);
     }
 
-    public void setAllergies( List<String> list) {
-        Gson gson = new Gson();
-        sharedPrefs().edit().putString(C.Prefs.USER_ALLERGIES, gson.toJson(list)).apply();
-    }
 
-    public List<String> getAllergies() {
-        Gson gson = new Gson();
-        String aux = sharedPrefs().getString(C.Prefs.USER_ALLERGIES, "");
-        return gson.fromJson(aux, List.class);
-    }
 
-    public void setDaysWeek(List list) {
-        Gson gson = new Gson();
-        sharedPrefs().edit().putString(C.Prefs.USER_DAYS_WEEK, gson.toJson(list)).apply();
+    /**
+     * Login: Remember me
+     */
+    public String getLoginName() {
+        return sharedPrefs().getString(C.Prefs.LOGIN_NAME, "");
     }
-    public List<Integer> getDaysWeek() {
-        Gson gson = new Gson();
-        String aux = sharedPrefs().getString(C.Prefs.USER_DAYS_WEEK, "");
-        return gson.fromJson(aux, List.class);
+    public String getLoginPass() {
+        return sharedPrefs().getString(C.Prefs.LOGIN_PASS, "");
     }
-
-    public void setHourAlarm(String result) {
-        sharedPrefs().edit().putString(C.Prefs.USER_HOUR_ALARM, result).apply();
+    public void setLoginName(String name) {
+        sharedPrefs().edit()
+                .putString(C.Prefs.LOGIN_NAME, name)
+                .commit();
     }
-    public String getHourAlarm() {
-        return sharedPrefs().getString(C.Prefs.USER_HOUR_ALARM, "");
+    public void setLoginFields(String name, String pass) {
+        sharedPrefs().edit()
+                .putString(C.Prefs.LOGIN_NAME, name)
+                .putString(C.Prefs.LOGIN_PASS, pass)
+                .commit();
+    }
+    public void clearLoginFields() {
+        sharedPrefs().edit()
+                .remove(C.Prefs.LOGIN_NAME)
+                .remove(C.Prefs.LOGIN_PASS)
+                .commit();
+    }
+    public String getLoginToken() {
+        return sharedPrefs().getString(C.Prefs.LOGIN_TOKEN, "");
+    }
+    public void setLoginToken(String token) {
+        sharedPrefs().edit().putString(C.Prefs.LOGIN_TOKEN, token).commit();
+    }
+    public void clearLoginToken() {
+        sharedPrefs().edit()
+                .remove(C.Prefs.LOGIN_TOKEN)
+                .commit();
     }
 }

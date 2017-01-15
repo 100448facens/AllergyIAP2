@@ -1,22 +1,21 @@
 package com.allergyiap.activities;
 
+import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckedTextView;
 
 import com.allergyiap.R;
-import com.allergyiap.adapters.AllergyAdapter;
 import com.allergyiap.adapters.StationAdapter;
-import com.allergyiap.beans.Allergy;
 import com.allergyiap.beans.Station;
-import com.allergyiap.service.AllergyService;
 import com.allergyiap.service.StationService;
+import com.allergyiap.utils.C;
+import com.allergyiap.utils.CommonServices;
+import com.allergyiap.utils.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +23,9 @@ import java.util.List;
 public class LocationActivity extends BaseActivity {
 
     private static final String TAG = "LocationActivity";
-
+    List<Station> stations = new ArrayList<>();
     private StationAdapter adapter;
     private RecyclerView recyclerView;
-    List<Station> stations = new ArrayList<>();
     private AsyncTask<Void, Void, List<Station>> task;
 
 
@@ -52,10 +50,28 @@ public class LocationActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        if(task != null) {
+        if (task != null) {
             task.cancel(true);
             task = null;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == CommonServices.RESULT_LOCATION_STATION){
+            //if(requestCode == CommonServices.RESULT_RESTART) {
+                setResult(CommonServices.RESULT_RESTART, new Intent());
+                finish();
+            //}
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(CommonServices.RESULT_RESTART, new Intent());
+        super.onBackPressed();
     }
 
     private void loadData() {
@@ -75,9 +91,18 @@ public class LocationActivity extends BaseActivity {
         adapter.setOnItemClickListener(new StationAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position, Station alertEntity) {
-                ((CheckedTextView)view).toggle();
+                //((CheckedTextView)view).toggle();
+                showMap(alertEntity);
             }
         });
+    }
+
+    private void showMap(Station alertEntity) {
+        Intent intent = new Intent(this, LocationMapActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(C.IntentExtra.Sender.VAR_STATION, alertEntity);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, CommonServices.RESULT_LOCATION_STATION);
     }
 
     private class LoadStationsBT extends AsyncTask<Void, Void, List<Station>> {

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.allergyiap.R;
 import com.allergyiap.beans.Allergy;
 import com.allergyiap.entities.AllergyLevelEntity;
+import com.allergyiap.service.UserAllergyService;
 
 import java.util.List;
 
@@ -42,6 +43,7 @@ public class AllergyAdapter extends RecyclerView.Adapter<AllergyAdapter.AllergyV
 
         viewHolder.allergyEntity = allergy;
         viewHolder.name.setText(allergy.getAllergy_name());
+        viewHolder.name.setChecked(UserAllergyService.getTheCurrentUserHasThisAllergy(allergy.getIdallergy()));
     }
 
     @Override

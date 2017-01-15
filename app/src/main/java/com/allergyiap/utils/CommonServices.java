@@ -22,6 +22,8 @@ public class CommonServices {
 
     public static final int REQUEST_SIGNUP = 100;
     public static final int PERMISSIONS_REQUEST_ACCESS_LOCATION = 200;
+    public static final int RESULT_LOCATION_STATION = 210;
+    public static final int RESULT_RESTART = 220;
 
     static CommonServices services;
     private Context context;

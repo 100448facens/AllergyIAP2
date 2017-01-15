@@ -1,29 +1,19 @@
 package com.allergyiap.activities;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckedTextView;
-import android.widget.ListView;
 
 import com.allergyiap.R;
 import com.allergyiap.adapters.AllergyAdapter;
-import com.allergyiap.adapters.CatalogAdapter;
 import com.allergyiap.beans.Allergy;
-import com.allergyiap.entities.CatalogEntity;
 import com.allergyiap.service.AllergyService;
-import com.allergyiap.utils.C;
+import com.allergyiap.service.UserAllergyService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +21,9 @@ import java.util.List;
 public class MyAllergiesActivity extends BaseActivity {
 
     private static final String TAG = "MyAllergiesActivity";
-
+    List<Allergy> allergies = new ArrayList<>();
     private AllergyAdapter adapter;
     private RecyclerView recyclerView;
-    List<Allergy> allergies = new ArrayList<>();
     private AsyncTask<Void, Void, List<Allergy>> task;
 
     @Override
@@ -59,7 +48,7 @@ public class MyAllergiesActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        if(task != null) {
+        if (task != null) {
             task.cancel(true);
             task = null;
         }
@@ -82,7 +71,9 @@ public class MyAllergiesActivity extends BaseActivity {
         adapter.setOnItemClickListener(new AllergyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position, Allergy alertEntity) {
-                ((CheckedTextView)view).toggle();
+                CheckedTextView v = (CheckedTextView) view;
+                v.toggle();
+                UserAllergyService.setAllergyToTheCurrentUser(alertEntity.getIdallergy(), v.isChecked());
             }
         });
     }

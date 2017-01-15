@@ -2,9 +2,10 @@ package com.allergyiap.utils;
 
 import android.util.Log;
 
-import com.google.firebase.iid.FirebaseInstanceIdService;
-
+import com.allergyiap.beans.User;
+import com.allergyiap.service.UserService;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdService;
 
 /**
  * Created by David on 06/01/2017.
@@ -28,6 +29,9 @@ public class FCMInstanceIDService extends FirebaseInstanceIdService {
 
     private void sendRegistrationToServer(String token) {
         //Implement this method if you want to store the token on your server
+        User u = UserService.getCurrentUser();
+        u.setDevice_key(token);
+        UserService.update(u);
     }
 
 }

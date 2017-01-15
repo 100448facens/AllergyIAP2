@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import java.util.Calendar;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -29,8 +30,8 @@ public class ReceptorBoot extends BroadcastReceiver {
 
         AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Calendar cal = Calendar.getInstance();
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        long millis = preferences.getLong("time_alarm", 0);
+        //SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        long millis = Prefs.getInstance(context).getNotificationHour();
         String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
                 TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
                 TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));

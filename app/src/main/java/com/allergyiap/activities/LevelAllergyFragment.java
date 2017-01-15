@@ -21,6 +21,7 @@ import com.allergyiap.beans.Allergy;
 import com.allergyiap.beans.AllergyLevel;
 import com.allergyiap.service.AllergyLevelService;
 import com.allergyiap.utils.C;
+import com.allergyiap.utils.Util;
 
 import java.util.List;
 
@@ -70,8 +71,7 @@ public class LevelAllergyFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setHasFixedSize(true);
-
-        loadData();
+        //loadData();
     }
 
 
@@ -125,6 +125,11 @@ public class LevelAllergyFragment extends Fragment {
         startActivity(intent);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadData();
+    }
 
     private class LoadAllergyLevelBT extends AsyncTask<Void, Void, List<AllergyLevel>> {
 
@@ -136,8 +141,7 @@ public class LevelAllergyFragment extends Fragment {
 
         @Override
         protected List<AllergyLevel> doInBackground(Void... params) {
-
-            return AllergyLevelService.getAll();
+            return AllergyLevelService.getByStation(Util.station.getIdstation());
         }
 
         @Override
