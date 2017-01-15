@@ -81,4 +81,21 @@
     <string name="apps_link" translatable="false"></string>
     <string name="btn_restart">Activar esta ubicación</string>
 
+
+    <string name="text_legend_0">La leyenda siguiente muestra la clasificación del estado actual de las alergias.</string>
+    <string name="text_legend_1">Nulo</string>
+    <string name="text_legend_2">Bajo</string>
+    <string name="text_legend_3">Medio</string>
+    <string name="text_legend_4">Alto</string>
+    <string name="text_legend_5">Máximo</string>
+    <string name="text_legend_6">Augmenta</string>
+    <string name="text_legend_7">Estable</string>
+    <string name="text_legend_8">Descenso</string>
+    <string name="text_legend_9">Atención</string>
+    <string name="text_legend">Leyenda</string>
+    <string name="text_information"><![CDATA[Todos los datos relacionados con las alergias se extraen de la Red Aerobiológica de Catalunya (Xarxa Aerobiològica de Catalunya, XAC). Los datos se publican y difunden con el fin de informar sobre el estado actual y la predicción futura de los niveles de polen alergénico.
+Prohibida la reproducción total o parcial de estos datos sin autorización. Más información: http://lap.uab.cat/aerobiologia/es/]]></string>
+    <string name="text_about"><![CDATA[Esta aplicación ha sido desarrollada como un proyecto de la Universidad de Lleida por 5 estudiantes del Máster en Ingeniería Informática: Luiz Fernando Jacção, Meritxell Jordana Gavieiro, Muhammad Mirza Fahmi, Jose David Nunes de Oliveira and Carolina Romeu Farré]]></string>
+
+
 </resources>
