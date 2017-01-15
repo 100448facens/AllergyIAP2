@@ -14,6 +14,7 @@ import com.allergyiap.adapters.StationAdapter;
 import com.allergyiap.beans.Station;
 import com.allergyiap.service.StationService;
 import com.allergyiap.utils.C;
+import com.allergyiap.utils.CommonServices;
 import com.allergyiap.utils.Util;
 
 import java.util.ArrayList;
@@ -55,6 +56,24 @@ public class LocationActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == CommonServices.RESULT_LOCATION_STATION){
+            //if(requestCode == CommonServices.RESULT_RESTART) {
+                setResult(CommonServices.RESULT_RESTART, new Intent());
+                finish();
+            //}
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(CommonServices.RESULT_RESTART, new Intent());
+        super.onBackPressed();
+    }
+
     private void loadData() {
         task = new LoadStationsBT();
         task.execute();
@@ -73,7 +92,6 @@ public class LocationActivity extends BaseActivity {
             @Override
             public void onItemClick(View view, int position, Station alertEntity) {
                 //((CheckedTextView)view).toggle();
-                Util.station = alertEntity;
                 showMap(alertEntity);
             }
         });
@@ -84,7 +102,7 @@ public class LocationActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable(C.IntentExtra.Sender.VAR_STATION, alertEntity);
         intent.putExtras(bundle);
-        startActivity(intent);
+        startActivityForResult(intent, CommonServices.RESULT_LOCATION_STATION);
     }
 
     private class LoadStationsBT extends AsyncTask<Void, Void, List<Station>> {

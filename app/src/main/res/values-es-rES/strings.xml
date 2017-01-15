@@ -77,5 +77,8 @@
     <string name="share_dialog_title">Compartir</string>
 
     <string name="progress_dialog_message">Aguarde, actualizando los datos</string>
+    <string name="menu_profile">Mi perfil</string>
+    <string name="apps_link" translatable="false"></string>
+    <string name="btn_restart">Activar esta ubicación</string>
 
 </resources>

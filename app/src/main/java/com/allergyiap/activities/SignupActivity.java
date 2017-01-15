@@ -31,6 +31,7 @@ public class SignupActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
+
         nameText = (EditText) findViewById(R.id.input_name);
         //emailText = (EditText) findViewById(R.id.input_email);
         passwordText = (EditText) findViewById(R.id.input_password);
@@ -83,7 +84,7 @@ public class SignupActivity extends BaseActivity {
                 onSignupSuccess();
                 progressDialog.dismiss();
                 UserService.setUserId(l);
-                User u=UserService.getCurrentUser();
+                User u = UserService.getCurrentUser();
                 u.setUser_name(name);
                 u.setUser_password(password);
                 u.setUser_mail(name);
@@ -105,7 +106,7 @@ public class SignupActivity extends BaseActivity {
         }
         // TODO: Implement your own signup logic here.
 
-        new android.os.Handler().postDelayed(
+        /*new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
                         // On complete call either onSignupSuccess or onSignupFailed
@@ -114,7 +115,7 @@ public class SignupActivity extends BaseActivity {
                         // onSignupFailed();
                         progressDialog.dismiss();
                     }
-                }, 3000);
+                }, 3000);*/
     }
 
 
@@ -160,4 +161,5 @@ public class SignupActivity extends BaseActivity {
 
         return valid;
     }
+
 }

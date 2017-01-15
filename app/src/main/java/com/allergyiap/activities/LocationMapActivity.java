@@ -1,12 +1,17 @@
 package com.allergyiap.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.allergyiap.R;
 import com.allergyiap.beans.Station;
 import com.allergyiap.utils.C;
+import com.allergyiap.utils.CommonServices;
+import com.allergyiap.utils.Util;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -35,6 +40,15 @@ public class LocationMapActivity extends BaseActivity implements OnMapReadyCallb
         mapFragment.getMapAsync(this);
 
         getSupportActionBar().setTitle(station.getName_station());
+
+        findViewById(R.id.btn_active).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Util.station = station;
+                setResult(CommonServices.RESULT_RESTART, new Intent());
+                finish();
+            }
+        });
     }
 
 
@@ -84,7 +98,7 @@ public class LocationMapActivity extends BaseActivity implements OnMapReadyCallb
         circleOptions.center(point);
 
         // Radius of the circle
-        circleOptions.radius(2000);
+        circleOptions.radius(3000);
 
         // Border color of the circle
         circleOptions.strokeColor(Color.BLACK);

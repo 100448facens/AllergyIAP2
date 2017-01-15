@@ -24,6 +24,7 @@ import com.allergyiap.beans.Station;
 import com.allergyiap.entities.ProductCatalogEntity;
 import com.allergyiap.service.StationService;
 import com.allergyiap.service.UserService;
+import com.allergyiap.utils.CommonServices;
 import com.allergyiap.utils.LocationService;
 import com.allergyiap.utils.ReceiveAlarm;
 import com.allergyiap.utils.Util;
@@ -71,13 +72,13 @@ public class MainActivity extends AppCompatActivity
             menu.findItem(R.id.nav_profile).setVisible(false);
             menu.findItem(R.id.nav_login).setVisible(true);
         }else{
-            menu.findItem(R.id.nav_profile).setVisible(false);
+            //menu.findItem(R.id.nav_profile).setVisible(true);
             menu.findItem(R.id.nav_login).setVisible(false);
-            /*
-            TextView t=(TextView)navigationView.findViewById(R.id.text_user);
+
+            TextView t = (TextView) navigationView.getHeaderView(0).findViewById(R.id.text_user);
             t.setText(UserService.getCurrentUser().getUser_name());
             t.setVisibility(View.VISIBLE);
-            */
+
         }
 
     }
@@ -106,6 +107,19 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == CommonServices.RESULT_LOCATION_STATION) {
+            if(resultCode == CommonServices.RESULT_RESTART) {
+                ((NavigationView) findViewById(R.id.nav_view)).setCheckedItem(R.id.nav_level);
+                ((NavigationView) findViewById(R.id.nav_view)).getMenu().performIdentifierAction(R.id.nav_level, 0);
+                changeTabText(Util.station.getName_station());
+            }
+        }
+    }
+
     private void updateMenu() {
         if (this.menu != null) {
             this.menu.findItem(R.id.menu_search).setVisible(menuItemVisibility[menuItemPosition.SEARCH.ordinal()]);
@@ -122,7 +136,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.menu_station) {
-            startActivity(new Intent(this, LocationActivity.class));
+            startActivityForResult(new Intent(this, LocationActivity.class), CommonServices.RESULT_LOCATION_STATION);
         }
 
         return super.onOptionsItemSelected(item);
@@ -138,10 +152,10 @@ public class MainActivity extends AppCompatActivity
                 drawer.closeDrawer(GravityCompat.START);
                 startActivity(new Intent(this, LoginActivity.class));
                 break;
-            case R.id.nav_profile:
+            /*case R.id.nav_profile:
                 drawer.closeDrawer(GravityCompat.START);
                 startActivity(new Intent(this, SignupActivity.class));
-                break;
+                break;*/
             case R.id.nav_level:
                 openFragment(LevelAllergyFragment.class);
                 //changeTabText(R.string.menu_level);

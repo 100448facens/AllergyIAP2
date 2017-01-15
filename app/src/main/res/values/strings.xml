@@ -5,6 +5,7 @@
     <string name="app_name">AllergyIAP</string>
     <string name="menu_login">Login</string>
     <string name="menu_signup">SignUp</string>
+    <string name="menu_profile">Profile</string>
     <string name="menu_level">Level</string>
     <string name="menu_product">Products</string>
     <string name="menu_settings">Settings</string>
@@ -12,6 +13,7 @@
     <string name="menu_allergy">My Allergies</string>
 
     <string name="product_catalog_name">Product Catalog</string>
+    <string name="btn_restart">Active this station</string>
 
     <string name="product_tab_about">About</string>
     <string name="product_tab_wherebuy">Where buy?</string>
