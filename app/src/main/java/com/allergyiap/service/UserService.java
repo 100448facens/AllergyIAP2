@@ -25,7 +25,6 @@ private static UserDao dao = new UserDao();
 				e.printStackTrace();
 			}
 		}
-
 	}
 	
 	public static void delete(int id){
