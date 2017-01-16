@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.allergyiap.R;
+import com.allergyiap.beans.Customer;
 import com.allergyiap.beans.ProductCatalog;
 import com.allergyiap.utils.DownloadImageTask;
 
@@ -66,10 +67,11 @@ public class ProductAboutFragment extends Fragment {
         new DownloadImageTask(viewHolder.productImage).execute(product.getProduct_url_image());
         viewHolder.productImage.setImageResource(R.drawable.allergy_product);
 
-        //TODO: Find the data of product's company
-        viewHolder.companyName.setText(product.getProduct_name());
-        viewHolder.companyDescription.setText(product.getProduct_description());
-        new DownloadImageTask(viewHolder.companyImage).execute(product.getProduct_url_image());
+        Customer cu=product.getCustomer();
+
+        viewHolder.companyName.setText(cu.getCompany_name());
+        viewHolder.companyDescription.setText(cu.getCompany_description());
+        new DownloadImageTask(viewHolder.companyImage).execute(cu.getUrl_logo());
         viewHolder.companyImage.setImageResource(R.drawable.allergy_product);
 
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AllergyIAP</string>
-    <string name="about_login">El login es para generar datos estádisticos de las alergias</string>
+    <string name="about_login">Es necesario loguearte para recibir notificaciones</string>
     <string name="map_name">Allergy Map</string>
     <string name="menu_login">Login</string>
     <string name="menu_level">Niveles</string>
@@ -98,6 +98,11 @@
 Prohibida la reproducción total o parcial de estos datos sin autorización. Más información: http://lap.uab.cat/aerobiologia/es/]]></string>
     <string name="text_about"><![CDATA[Esta aplicación ha sido desarrollada como un proyecto de la Universidad de Lleida por 5 estudiantes del Máster en Ingeniería Informática: Luiz Fernando Jacção, Meritxell Jordana Gavieiro, Muhammad Mirza Fahmi, Jose David Nunes de Oliveira and Carolina Romeu Farré]]></string>
     <string name="terms">He leído los terminos</string>
+    <string name="text_terms">Términos y Condiciones\nÚltima actualización: 16/01/2017\n\nPor favor lea estos Términos y Condiciones cuidadosamente antes de usar la aplicación móvil Allergy IAP operada por Allergy IAP Group. Su acceso y uso del Servicio está condicionado a su aceptación y cumplimiento de estos Términos. Estos Términos se aplican a los usuarios registrados. Al acceder o utilizar el Servicio, usted acepta estar sujeto a estos Términos. Si no está de acuerdo con alguna parte de los términos, entonces no podrá acceder al Servicio.\n\n\n\nEnlaces a otros sitios web\nNuestro Servicio puede contener enlaces a sitios web o servicios de terceros que no son propiedad o son controlados por Allergy IAP Group. Allergy IAP Group no tiene ningún control sobre, ni asume ninguna responsabilidad por el contenido, las políticas de privacidad o las prácticas de los sitios web o servicios de terceros. Además, usted reconoce y acepta que Allergy IAP Group no será responsable, directa o indirectamente, por cualquier daño o pérdida causada o supuestamente causada por o en relación con el uso o dependencia de dichos contenidos, bienes o servicios disponibles en o a través de dichos sitios web o servicios.\n\nCambios\nNos reservamos el derecho, a nuestra sola discreción, de modificar o reemplazar estos Términos en cualquier momento. Si una revisión es material, trataremos de notificar con un mínimo de 30 días de antelación a la entrada en vigor de los nuevos términos. Lo que constituye un cambio material se determinará a nuestra sola discreción.\n\nContáctenos\nSi tiene alguna pregunta sobre estos Términos, póngase en contacto con nosotros.\nallergyIAP@gmail.com\n\n</string>
+    <string name="title_activity_terms">Términos</string>
+    <string name="title_activity_my_allergies">Mis alergias</string>
+    <string name="title_activity_help">Ayuda</string>
+    <string name="title_activity_location"></string>
 
 
 </resources>

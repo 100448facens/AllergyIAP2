@@ -32,14 +32,16 @@
             </intent-filter>
         </service>
 
-        <!--receiver android:name=".utils.ReceiveAlarm" />
+        <!--
+        receiver android:name=".utils.ReceiveAlarm" />
         <receiver
             android:name=".utils.ReceptorBoot"
             android:enabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-        </receiver-->
+        </receiver
+        -->
 
         <activity
             android:name=".activities.LaunchScreenActivity"
@@ -97,7 +99,10 @@
         <activity
             android:name=".activities.LocationMapActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_location_map"/>
+            android:label="@string/title_activity_location_map" />
+        <activity android:name=".activities.TermsActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_terms"/>
     </application>
 
 </manifest>

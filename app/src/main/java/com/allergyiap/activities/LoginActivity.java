@@ -39,6 +39,12 @@ public class LoginActivity extends BaseActivity {
         emailText = (EditText) findViewById(R.id.input_email);
         signupLink = (TextView) findViewById(R.id.link_signup);
         terms = (Switch) findViewById(R.id.switch_terms);
+        ((TextView)findViewById(R.id.text_terms2)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, TermsActivity.class));
+            }
+        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +63,9 @@ public class LoginActivity extends BaseActivity {
                 startActivityForResult(intent, CommonServices.REQUEST_SIGNUP);
             }
         });
+
         D.showSimpleDialog(this, getString(R.string.app_name), getString(R.string.about_login));
+
     }
 
     public void login() {

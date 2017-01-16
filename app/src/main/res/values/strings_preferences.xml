@@ -5,7 +5,7 @@
     <string name="allow_sounds">Enable sounds</string>
     <string name="notify_level_increase">Notify when the allergy level increase</string>
 
-    <string name="version_app">Application Version %1$s</string>
+    <string name="version_app" translatable="false">Application Version %1$s</string>
     <string name="title_version_app">Information</string>
 
     <string name="menu_info">Info</string>

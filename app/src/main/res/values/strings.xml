@@ -3,7 +3,7 @@
     <string name="apps_link" translatable="false">http://url.app/store.php</string>
 
     <string name="app_name">AllergyIAP</string>
-    <string name="about_login">The login is to generate statistics about the allergies</string>
+    <string name="about_login">You need to login to receive notifications</string>
     <string name="menu_login">Login</string>
     <string name="menu_signup">SignUp</string>
     <string name="menu_profile">Profile</string>
@@ -164,5 +164,7 @@ Forbidden the reproduction total or partial of this data without authorization. 
 
     <string name="progress_dialog_message">Wait, updating data!</string>
     <string name="title_activity_location_map">Map</string>
+    <string name="title_activity_terms">Terms</string>
+    <string name="text_terms">Terms and Conditions\nLast updated: 16/01/2017\n\nPlease read these Terms and Conditions carefully before using the Allergy IAP mobile application operated by Allergy IAP Group. Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to a registered users. By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you may not access the Service.\n\nLinks To Other Web Sites\nOur Service may contain links to third-­party web sites or services that are not owned or controlled by Allergy IAP Group. Allergy IAP Group has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that Allergy IAP Group shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods or services available on or through any such web sites or services.\n\nChanges\nWe reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will try to provide at least 30 days notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.\n\nContact Us\nIf you have any questions about these Terms, please contact us.\nallergyIAP@gmail.com</string>
 
 </resources>
