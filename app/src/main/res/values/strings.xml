@@ -58,6 +58,7 @@ Forbidden the reproduction total or partial of this data without authorization. 
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="menu_signin">Log In</string>
+    <string name="terms">I accept the terms</string>
 
     <string name="navigation_drawer_open"></string>
     <string name="navigation_drawer_close"></string>

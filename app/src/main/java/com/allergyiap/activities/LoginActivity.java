@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class LoginActivity extends BaseActivity {
     private EditText passwordText;
     private EditText emailText;
     private TextView signupLink;
+    private Switch terms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class LoginActivity extends BaseActivity {
         passwordText = (EditText) findViewById(R.id.input_password);
         emailText = (EditText) findViewById(R.id.input_email);
         signupLink = (TextView) findViewById(R.id.link_signup);
+        terms = (Switch) findViewById(R.id.switch_terms);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,8 +131,14 @@ public class LoginActivity extends BaseActivity {
         String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        /*if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailText.setError("enter a valid emailText address");
+            valid = false;
+        } else {
+            emailText.setError(null);
+        }*/
+        if (email.isEmpty() || email.length() < 3) {
+            emailText.setError("at least 3 characters");
             valid = false;
         } else {
             emailText.setError(null);
@@ -140,6 +149,13 @@ public class LoginActivity extends BaseActivity {
             valid = false;
         } else {
             passwordText.setError(null);
+        }
+
+        if (!terms.isChecked()) {
+            //terms.setError("Agree the terms");
+            valid = false;
+        } else {
+            //terms.setError(null);
         }
 
         return valid;

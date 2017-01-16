@@ -103,12 +103,13 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 UserService.update(u);
             } else if (preference instanceof MultiSelectListPreference) {
                 MultiSelectListPreference castPreference = (MultiSelectListPreference) preference;
-                Set<String> sts = castPreference.getValues();
-                String weekdays = "";
-                for (String s :
-                        sts) {
+                //Set<String> sts = castPreference.getValues();
+
+                String weekdays = stringValue.replaceAll("[^\\w\\s]","");
+                weekdays = weekdays.replaceAll("\\s", "");
+                /*for (String s : sts) {
                     weekdays += s;
-                }
+                }*/
                 User u = UserService.getCurrentUser();
                 u.setAlarm_weekdays(weekdays);
                 UserService.update(u);
