@@ -50,4 +50,17 @@ public class A {
         sendIntent.setType("text/plain");
         activity.startActivity(Intent.createChooser(sendIntent, activity.getString(R.string.share_dialog_title)));
     }
+
+    /**
+     * URL
+     */
+    public static void startURL(Activity activity, String url) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            activity.startActivity(intent);
+        } catch (Exception e) {
+            Log.e("Actions.startURL", "exception", e);
+            //Toast.makeText(activity, activity.getString(R.string.action_start_url), Toast.LENGTH_SHORT).show();
+        }
+    }
 }

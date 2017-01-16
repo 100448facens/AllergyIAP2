@@ -97,6 +97,7 @@
     <string name="text_information"><![CDATA[Todos los datos relacionados con las alergias se extraen de la Red Aerobiológica de Catalunya (Xarxa Aerobiològica de Catalunya, XAC). Los datos se publican y difunden con el fin de informar sobre el estado actual y la predicción futura de los niveles de polen alergénico.
 Prohibida la reproducción total o parcial de estos datos sin autorización. Más información: http://lap.uab.cat/aerobiologia/es/]]></string>
     <string name="text_about"><![CDATA[Esta aplicación ha sido desarrollada como un proyecto de la Universidad de Lleida por 5 estudiantes del Máster en Ingeniería Informática: Luiz Fernando Jacção, Meritxell Jordana Gavieiro, Muhammad Mirza Fahmi, Jose David Nunes de Oliveira and Carolina Romeu Farré]]></string>
+    <string name="terms">He leído los terminos</string>
 
 
 </resources>
