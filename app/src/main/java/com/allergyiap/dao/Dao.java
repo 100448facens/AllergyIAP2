@@ -26,20 +26,24 @@ public abstract class Dao<T> {
 
     public abstract List<T> getAll();
 
+    public boolean updateData(String path){
+        try {
+            String jsonStr = Util.getUrl(path);
+            JSONArray jsonObj = new JSONArray(jsonStr);
+            for (int i = 0; i < jsonObj.length(); i++) {
+                JSONObject keyValue = jsonObj.getJSONObject(i);
+                db.insertJson(keyValue, this.entityName);
+            }
+            db.setLastUpdateToNow(this.entityName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
     public boolean updateFromWS(int days) {
         if (!db.getLastUpdate(this.entityName, days)) {
-            try {
-                String jsonStr = Util.getUrl(C.Network.WS_URL + this.entityName);
-                JSONArray jsonObj = new JSONArray(jsonStr);
-                for (int i = 0; i < jsonObj.length(); i++) {
-                    JSONObject keyValue = jsonObj.getJSONObject(i);
-                    db.insertJson(keyValue, this.entityName);
-                }
-                db.setLastUpdateToNow(this.entityName);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return true;
+            return updateData(C.Network.WS_URL + this.entityName);
         }
         return false;
     }

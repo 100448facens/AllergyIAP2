@@ -59,6 +59,7 @@ public class LaunchScreenActivity extends BaseActivity {
         progressDialog.setTitle(getString(R.string.app_name));
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         progressDialog.show();
+        progressDialog.setCanceledOnTouchOutside(false);
 
         if (checkPermissionLocation()) {
             task = new BackgroundTask().execute();
